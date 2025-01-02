@@ -78,7 +78,7 @@ function WorkoutConfig() {
                     handleIncrementBtn={() => setCountdown(countdown + 1)}
                     handleInput={(e) => setCountdown(e.target.value)}
                 />
-                <button className="m-5 border border-slate-950 bg-green-600 p-2 text-white">
+                <button className="m-5 border border-slate-950 bg-green-700 p-2 text-white">
                     Start Workout{' '}
                 </button>
             </form>
