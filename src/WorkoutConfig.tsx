@@ -1,20 +1,27 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { InputStateContext } from './App';
 import Inputs from './Inputs';
 import TimeInput from './TimeInput';
 import { useNavigate } from 'react-router';
 
 function WorkoutConfig() {
-    const [reps, setReps] = useState(1);
-    const [repInterval, setRepInterval] = useState(0);
-    const [waves, setWaves] = useState(2);
-    const [waveInterval, setWaveInterval] = useState(5);
-    const [countdown, setCountdown] = useState(5);
+    const {
+        reps,
+        setReps,
+        setRepInterval,
+        waves,
+        setWaves,
+        waveInterval,
+        setWaveInterval,
+        countdown,
+        setCountdown,
+    } = useContext(InputStateContext);
 
     let navigate = useNavigate();
 
     function handleStartWorkout(e) {
         e.preventDefault();
-        navigate('/run-workout');
+        navigate('/countdown');
     }
 
     return (
