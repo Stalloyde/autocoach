@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Header from './Header';
 import Inputs from './Inputs';
 import TimeInput from './TimeInput';
+import { useNavigate } from 'react-router';
 
 function WorkoutConfig() {
     const [reps, setReps] = useState(1);
@@ -10,15 +10,20 @@ function WorkoutConfig() {
     const [waveInterval, setWaveInterval] = useState(5);
     const [countdown, setCountdown] = useState(5);
 
+    let navigate = useNavigate();
+
     function handleStartWorkout(e) {
         e.preventDefault();
-        console.log(reps, repInterval, waves, waveInterval, countdown);
+        navigate('/run-workout');
     }
 
     return (
         <>
-            <Header />
-            <form action="POST" onSubmit={handleStartWorkout}>
+            <form
+                action="POST"
+                onSubmit={handleStartWorkout}
+                className="grid justify-center p-2"
+            >
                 <Inputs
                     label="# of Repetition"
                     inputType="number"
@@ -73,8 +78,9 @@ function WorkoutConfig() {
                     handleIncrementBtn={() => setCountdown(countdown + 1)}
                     handleInput={(e) => setCountdown(e.target.value)}
                 />
-
-                <button> Start Workout </button>
+                <button className="m-5 border border-slate-950 bg-green-600 p-2 text-white">
+                    Start Workout{' '}
+                </button>
             </form>
         </>
     );

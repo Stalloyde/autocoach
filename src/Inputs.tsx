@@ -14,7 +14,7 @@ function Inputs({
     disableTyping,
 }) {
     return (
-        <div className="p-2">
+        <div className="m-3 p-2">
             <label htmlFor={id} className="grid">
                 {label}
             </label>

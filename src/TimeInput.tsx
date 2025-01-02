@@ -15,7 +15,7 @@ const TimeInput = ({ setRepInterval }) => {
     };
 
     return (
-        <div className="p-2">
+        <div className="m-3 p-2">
             <label htmlFor="timeInput">Interval per Repetition (MM:SS) </label>
             <div className="w-72 outline outline-1">
                 <input
