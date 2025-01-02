@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 function WorkoutConfig() {
     const [reps, setReps] = useState(1);
     const [repInterval, setRepInterval] = useState(0);
-    const [waves, setWaves] = useState(1);
+    const [waves, setWaves] = useState(2);
     const [waveInterval, setWaveInterval] = useState(5);
     const [countdown, setCountdown] = useState(5);
 
@@ -49,23 +49,27 @@ function WorkoutConfig() {
                     handleIncrementBtn={() => setWaves(waves + 1)}
                     handleInput={(e) => setWaves(e.target.value)}
                 />
-                <Inputs
-                    label="Interval between Waves (seconds)"
-                    inputType="number"
-                    id="intervalWave"
-                    minValue="5"
-                    value={waveInterval}
-                    handleDecrementBtn={() =>
-                        waveInterval === 5
-                            ? null
-                            : setWaveInterval(waveInterval - 5)
-                    }
-                    handleIncrementBtn={() => setWaveInterval(waveInterval + 5)}
-                    handleInput={(e) => setWaveInterval(e.target.value)}
-                    disableTyping={(e) => {
-                        e.preventDefault();
-                    }}
-                />
+                {waves > 1 ? (
+                    <Inputs
+                        label="Interval between Waves (seconds)"
+                        inputType="number"
+                        id="intervalWave"
+                        minValue="5"
+                        value={waveInterval}
+                        handleDecrementBtn={() =>
+                            waveInterval === 5
+                                ? null
+                                : setWaveInterval(waveInterval - 5)
+                        }
+                        handleIncrementBtn={() =>
+                            setWaveInterval(waveInterval + 5)
+                        }
+                        handleInput={(e) => setWaveInterval(e.target.value)}
+                        disableTyping={(e) => {
+                            e.preventDefault();
+                        }}
+                    />
+                ) : null}
                 <Inputs
                     label="Countdown Timer (seconds)"
                     inputType="number"
