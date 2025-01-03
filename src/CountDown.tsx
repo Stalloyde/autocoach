@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import { InputStateContext } from './App';
+import { useNavigate } from 'react-router';
 
 function CountDown() {
     const [displayTime, setDisplayTime] = useState('');
 
+    const navigate = useNavigate();
+
     const { reps, repInterval, waves, waveInterval, countdown, setCountdown } =
         useContext(InputStateContext);
+
+    if (repInterval < 1) navigate('/');
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -19,7 +24,9 @@ function CountDown() {
     useEffect(() => {
         const seconds = repInterval % 60;
         const minutes = (repInterval - seconds) / 60;
-        setDisplayTime(`${minutes}:${seconds}`);
+        setDisplayTime(
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+        );
     }, [repInterval]);
 
     return (
