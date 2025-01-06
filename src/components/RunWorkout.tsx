@@ -10,10 +10,6 @@ import {
 import { useNavigate } from 'react-router';
 import { FormatTime } from '../helpers/FormatTime';
 
-//{waveInterval} countdown for {waves} amount of times
-//on every {repInterval}, repeat the above for {reps} amount of times
-//workout completed
-
 function RunWorkout() {
     const { reps, repInterval, waves, displayInterval, waveInterval } =
         useContext(InputStateContext);
@@ -43,7 +39,7 @@ function RunWorkout() {
             currentRepInterval === repInterval
         ) {
             playWorkoutCompleted();
-            navigate('/workout-complete');
+            navigate('/completed-workout');
         }
 
         //if reps not completed, begin countdown and prep for next rep

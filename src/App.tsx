@@ -3,6 +3,7 @@ import Header from './sub-components/Header';
 import CountDown from './components/CountDown';
 import WorkoutConfig from './components/WorkoutConfig';
 import RunWorkout from './components/RunWorkout';
+import CompletedWorkout from './components/CompletedWorkout';
 import { Routes, Route } from 'react-router';
 
 export const InputStateContext = createContext(null);
@@ -42,6 +43,10 @@ function App() {
                         <Route path="/" element={<WorkoutConfig />} />
                         <Route path="/countdown" element={<CountDown />} />
                         <Route path="/run-workout" element={<RunWorkout />} />
+                        <Route
+                            path="/completed-workout"
+                            element={<CompletedWorkout />}
+                        />
                     </Routes>
                 </main>
             </div>
