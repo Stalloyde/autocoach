@@ -8,11 +8,11 @@ function WorkoutConfig() {
     const {
         reps,
         setReps,
+        repInterval,
         setRepInterval,
         waves,
         setWaves,
         waveInterval,
-        setWaveInterval,
         countdown,
         setCountdown,
     } = useContext(InputStateContext);
@@ -33,15 +33,15 @@ function WorkoutConfig() {
             >
                 <Inputs
                     label="# of Repetition"
-                    inputType="number"
+                    inputType="tel"
                     id="repetitions"
                     minValue="1"
                     value={reps}
                     handleDecrementBtn={() =>
                         reps > 1 ? setReps(reps - 1) : null
                     }
-                    handleIncrementBtn={() => setReps(reps + 1)}
-                    handleInput={(e) => setReps(e.target.value)}
+                    handleIncrementBtn={() => setReps((prev) => prev + 1)}
+                    handleInput={(e) => setReps(Number(e.target.value))}
                 />
                 <TimeInput setRepInterval={setRepInterval} />
                 <Inputs
@@ -49,45 +49,37 @@ function WorkoutConfig() {
                     inputType="number"
                     id="waves"
                     value={waves}
-                    minValue="1"
+                    minValue="2"
+                    maxValue={repInterval / waveInterval - 1}
                     handleDecrementBtn={() =>
-                        waves > 1 ? setWaves(waves - 1) : null
+                        waves > 2 ? setWaves(waves - 1) : null
                     }
-                    handleIncrementBtn={() => setWaves(waves + 1)}
-                    handleInput={(e) => setWaves(e.target.value)}
+                    handleIncrementBtn={() => setWaves((prev) => prev + 1)}
+                    handleInput={(e) => setWaves(Number(e.target.value))}
                 />
-                {waves > 1 ? (
-                    <Inputs
-                        label="Interval between Waves (seconds)"
-                        inputType="number"
-                        id="intervalWave"
-                        minValue="5"
-                        value={waveInterval}
-                        handleDecrementBtn={() =>
-                            waveInterval === 5
-                                ? null
-                                : setWaveInterval(waveInterval - 5)
-                        }
-                        handleIncrementBtn={() =>
-                            setWaveInterval(waveInterval + 5)
-                        }
-                        handleInput={(e) => setWaveInterval(e.target.value)}
-                        disableTyping={(e) => {
-                            e.preventDefault();
-                        }}
-                    />
-                ) : null}
+                <Inputs
+                    label="Interval between Waves (seconds)"
+                    fixed={true}
+                    inputType="tel"
+                    id="intervalWave"
+                    defaultValue={waveInterval}
+                    disableTyping={(e) => {
+                        e.preventDefault();
+                    }}
+                />
                 <Inputs
                     label="Countdown Timer (seconds)"
-                    inputType="number"
+                    inputType="tel"
                     id="countdown"
                     minValue="3"
                     value={countdown}
                     handleDecrementBtn={() =>
-                        countdown === 5 ? null : setCountdown(countdown - 1)
+                        countdown === 5
+                            ? null
+                            : setCountdown((prev) => prev - 1)
                     }
-                    handleIncrementBtn={() => setCountdown(countdown + 1)}
-                    handleInput={(e) => setCountdown(e.target.value)}
+                    handleIncrementBtn={() => setCountdown((prev) => prev + 1)}
+                    handleInput={(e) => setCountdown(Number(e.target.value))}
                 />
                 <button className="m-5 border border-slate-950 bg-green-700 p-2 text-white">
                     Start Workout{' '}
