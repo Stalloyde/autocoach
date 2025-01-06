@@ -2,6 +2,7 @@ import { useState, createContext } from 'react';
 import Header from './Header';
 import CountDown from './CountDown';
 import WorkoutConfig from './WorkoutConfig';
+import RunWorkout from './RunWorkout';
 import { Routes, Route } from 'react-router';
 
 export const InputStateContext = createContext(null);
@@ -10,7 +11,8 @@ function App() {
     const [reps, setReps] = useState(1);
     const [repInterval, setRepInterval] = useState(0);
     const [waves, setWaves] = useState(2);
-    const [waveInterval, setWaveInterval] = useState(5);
+    const [waveInterval, setWaveInterval] = useState(10);
+    const [displayInterval, setDisplayInterval] = useState('');
     const [countdown, setCountdown] = useState(5);
 
     return (
@@ -24,6 +26,8 @@ function App() {
                 setWaves,
                 waveInterval,
                 setWaveInterval,
+                displayInterval,
+                setDisplayInterval,
                 countdown,
                 setCountdown,
             }}
@@ -37,6 +41,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<WorkoutConfig />} />
                         <Route path="/countdown" element={<CountDown />} />
+                        <Route path="/run-workout" element={<RunWorkout />} />
                     </Routes>
                 </main>
             </div>
