@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { InputStateContext } from './App';
-import Inputs from './Inputs';
-import TimeInput from './TimeInput';
+import { InputStateContext } from '../App';
+import Inputs from '../sub-components/Inputs';
+import TimeInput from '../sub-components/TimeInput';
 import { useNavigate } from 'react-router';
 
 function WorkoutConfig() {

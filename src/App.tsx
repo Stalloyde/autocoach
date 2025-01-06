@@ -1,8 +1,8 @@
 import { useState, createContext } from 'react';
-import Header from './Header';
-import CountDown from './CountDown';
-import WorkoutConfig from './WorkoutConfig';
-import RunWorkout from './RunWorkout';
+import Header from './sub-components/Header';
+import CountDown from './components/CountDown';
+import WorkoutConfig from './components/WorkoutConfig';
+import RunWorkout from './components/RunWorkout';
 import { Routes, Route } from 'react-router';
 
 export const InputStateContext = createContext(null);

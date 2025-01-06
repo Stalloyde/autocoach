@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
-import { InputStateContext } from './App';
+import { InputStateContext } from '../App';
 import {
     playGo,
     playTYM,
     playFiveSeconds,
     playWorkoutCompleted,
-} from './playAudio';
+} from '../helpers/playAudio';
 import { useNavigate } from 'react-router';
-import { FormatTime } from './DisplayTime';
+import { FormatTime } from '../helpers/FormatTime';
 
 //{waveInterval} countdown for {waves} amount of times
 //on every {repInterval}, repeat the above for {reps} amount of times

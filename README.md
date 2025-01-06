@@ -48,3 +48,6 @@ export default tseslint.config({
   },
 })
 ```
+
+
+https://elevenlabs.io/app/speech-synthesis/text-to-speech
