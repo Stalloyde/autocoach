@@ -1,33 +1,44 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import { InputStateContext } from './App';
+import { playGo, playTYM, playFiveSeconds } from './playAudio';
 import { useNavigate } from 'react-router';
+import { FormatTime } from './DisplayTime';
 
 function CountDown() {
-    const [displayTime, setDisplayTime] = useState('');
-
     const navigate = useNavigate();
 
-    const { reps, repInterval, waves, waveInterval, countdown, setCountdown } =
-        useContext(InputStateContext);
-
-    if (repInterval < 1) navigate('/');
+    const {
+        reps,
+        repInterval,
+        waves,
+        waveInterval,
+        countdown,
+        displayInterval,
+        setDisplayInterval,
+        setCountdown,
+    } = useContext(InputStateContext);
 
     useEffect(() => {
+        if (countdown === 5) playFiveSeconds();
+        if (countdown === 2) playTYM();
+
+        if (countdown === 0) {
+            navigate('/run-workout');
+            playGo();
+        }
+
         const interval = setInterval(() => {
-            if (countdown > 0) setCountdown(countdown - 1);
+            if (countdown > 0) setCountdown((prev) => prev - 1);
         }, 1000);
 
         return () => clearInterval(interval);
     }, [countdown]);
 
     useEffect(() => {
-        const seconds = repInterval % 60;
-        const minutes = (repInterval - seconds) / 60;
-        setDisplayTime(
-            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-        );
-    }, [repInterval]);
+        if (repInterval < 1) navigate('/');
+        setDisplayInterval(FormatTime(repInterval));
+    }, []);
 
     return (
         <>
@@ -38,12 +49,30 @@ function CountDown() {
                 <div className="flex justify-center text-[150px]">
                     {countdown}
                 </div>
-                <div className="h-32 border border-slate-950 text-center text-[20px]">
+                <div className="border border-slate-950 text-center text-[20px]">
                     <h2 className="underline">Workout Details</h2>
-                    <div> Number of Repetitions: {reps}</div>
-                    <div> Interval per Repetition: {displayTime}</div>
-                    <div> Number of Waves: {waves}</div>
-                    <div> Interval between Waves: {waveInterval}</div>
+                    <div className="grid grid-cols-[2fr_1fr]">
+                        <div className="grid justify-end">
+                            Number of Repetitions:
+                        </div>
+                        <div>{reps}</div>
+                    </div>
+                    <div className="grid grid-cols-[2fr_1fr]">
+                        <div className="grid justify-end">
+                            Interval per Repetition:
+                        </div>
+                        <div>{displayInterval}</div>
+                    </div>
+                    <div className="grid grid-cols-[2fr_1fr]">
+                        <div className="grid justify-end">Number of Waves:</div>
+                        <div>{waves}</div>
+                    </div>
+                    <div className="grid grid-cols-[2fr_1fr]">
+                        <div className="grid justify-end">
+                            Interval between Waves:
+                        </div>
+                        <div>{waveInterval}</div>
+                    </div>
                 </div>
             </div>
         </>
