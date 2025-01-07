@@ -3,6 +3,8 @@ import Header from './sub-components/Header';
 import CountDown from './components/CountDown';
 import WorkoutConfig from './components/WorkoutConfig';
 import RunWorkout from './components/RunWorkout';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import CompletedWorkout from './components/CompletedWorkout';
 import { Routes, Route } from 'react-router';
 
@@ -47,6 +49,8 @@ function App() {
                             path="/completed-workout"
                             element={<CompletedWorkout />}
                         />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/sign-up" element={<Signup />} />
                     </Routes>
                 </main>
             </div>
