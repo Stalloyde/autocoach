@@ -77,12 +77,14 @@ function RunWorkout() {
 
     return (
         <>
-            <div className="grid items-center justify-center">
-                <div className="text-center text-[50px]">
-                    Current Time: {formattedCurrentRepInterval}
-                </div>
-                <div className="text-center text-[20px]">
-                    Rep {currentRep}/{reps} - Wave {currentWave}/{waves}
+            <div className="grid grid-rows-[1fr_1fr_1fr] items-center justify-center">
+                <div>
+                    <div className="text-center text-[50px]">
+                        Current Time: {formattedCurrentRepInterval}
+                    </div>
+                    <div className="text-center text-[20px]">
+                        Rep {currentRep}/{reps} - Wave {currentWave}/{waves}
+                    </div>
                 </div>
                 <div className="grid justify-center text-[150px]">
                     <div>{currentCountdown}</div>
