@@ -4,7 +4,7 @@ import CountDown from './components/CountDown';
 import WorkoutConfig from './components/WorkoutConfig';
 import RunWorkout from './components/RunWorkout';
 import Login from './components/Login';
-import Signup from './components/Signup';
+import Signup from './components/Signup/Signup';
 import CompletedWorkout from './components/CompletedWorkout';
 import { Routes, Route } from 'react-router';
 
