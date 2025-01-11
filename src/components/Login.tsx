@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router';
+import Cookies from 'js-cookie';
+import { InputStateContext } from '../App';
 
 function Login() {
     const [usernameValue, setUsernameValue] = useState('');
@@ -7,6 +9,9 @@ function Login() {
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const navigate = useNavigate();
+
+    const { token, setToken, currentUser, setCurrentUser } =
+        useContext(InputStateContext);
 
     function handleUsernameInput(e) {
         setUsernameValue(e.target.value);
@@ -20,6 +25,20 @@ function Login() {
         setUsernameError(errors.usernameError || '');
         setPasswordError(errors.passwordError || '');
     }
+
+    const handleToken = (BearerToken: string, currentUser: string) => {
+        const oneMinute = new Date(new Date().getTime() + 10 * 60 * 1000);
+        Cookies.set('token', BearerToken, {
+            expires: oneMinute,
+            secure: true,
+        });
+        Cookies.set('currentUser', currentUser, {
+            expires: oneMinute,
+            secure: true,
+        });
+        setToken(Cookies.get('token'));
+        setCurrentUser(Cookies.get('currentUser'));
+    };
 
     async function handleLogin(e) {
         e.preventDefault();
@@ -39,6 +58,7 @@ function Login() {
         if (responseData.usernameError || responseData.passwordError) {
             handleErrors(responseData);
         } else {
+            handleToken(responseData.Bearer, responseData.username);
             navigate(`/${responseData.username}`);
         }
     }

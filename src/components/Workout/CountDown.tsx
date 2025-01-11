@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useContext } from 'react';
-import { InputStateContext } from '../App';
-import { playGo, playTYM, playFiveSeconds } from '../helpers/playAudio';
+import { InputStateContext } from '../../App';
+import { playGo, playTYM, playFiveSeconds } from '../../helpers/playAudio';
 import { useNavigate } from 'react-router';
-import { FormatTime } from '../helpers/FormatTime';
+import { FormatTime } from '../../helpers/FormatTime';
 
 function CountDown() {
     const navigate = useNavigate();
@@ -17,6 +17,8 @@ function CountDown() {
         displayInterval,
         setDisplayInterval,
         setCountdown,
+        token,
+        currentUser,
     } = useContext(InputStateContext);
 
     useEffect(() => {
@@ -24,8 +26,10 @@ function CountDown() {
         if (countdown === 2) playTYM();
 
         if (countdown === 0) {
-            navigate('/run-workout');
             playGo();
+            token
+                ? navigate(`/run-workout/${currentUser}`)
+                : navigate('/run-workout');
         }
 
         const interval = setInterval(() => {

@@ -1,18 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
-import { InputStateContext } from '../App';
+import { InputStateContext } from '../../App';
 import {
     playGo,
     playTYM,
     playFiveSeconds,
     playWorkoutCompleted,
-} from '../helpers/playAudio';
+} from '../../helpers/playAudio';
 import { useNavigate } from 'react-router';
-import { FormatTime } from '../helpers/FormatTime';
+import { FormatTime } from '../../helpers/FormatTime';
 
 function RunWorkout() {
-    const { reps, repInterval, waves, displayInterval, waveInterval } =
-        useContext(InputStateContext);
+    const {
+        reps,
+        repInterval,
+        waves,
+        displayInterval,
+        waveInterval,
+        setCountdown,
+    } = useContext(InputStateContext);
     const navigate = useNavigate();
 
     const [currentCountdown, setCurrentCountdown] = useState(waveInterval);
@@ -39,6 +45,7 @@ function RunWorkout() {
             currentRepInterval === repInterval
         ) {
             playWorkoutCompleted();
+            setCountdown(5);
             navigate('/completed-workout');
         }
 

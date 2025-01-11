@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import { InputStateContext } from '../App';
-import Inputs from '../sub-components/Inputs';
-import TimeInput from '../sub-components/TimeInput';
+import { useContext, useEffect } from 'react';
+import { InputStateContext } from '../../App';
+import Inputs from '../../inputs/Inputs';
+import TimeInput from '../../inputs/TimeInput';
 import { useNavigate } from 'react-router';
 
 function WorkoutConfig() {
@@ -15,25 +15,36 @@ function WorkoutConfig() {
         waveInterval,
         countdown,
         setCountdown,
+        token,
+        currentUser,
     } = useContext(InputStateContext);
 
     let navigate = useNavigate();
 
     function handleStartWorkout(e) {
         e.preventDefault();
-        navigate('/countdown');
+        token ? navigate(`/countdown/${currentUser}`) : navigate('/countdown');
     }
+
+    function saveToFavourites(e) {
+        e.preventDefault();
+        console.log(reps, repInterval, waves, waveInterval, countdown);
+    }
+
+    useEffect(() => {
+        token ? navigate(`/${currentUser}`) : null;
+    }, []);
 
     return (
         <>
             <form
                 action="POST"
-                onSubmit={handleStartWorkout}
+                onSubmit={(e) => handleStartWorkout(e)}
                 className="grid justify-center p-2"
             >
                 <Inputs
                     label="# of Repetition"
-                    inputType="tel"
+                    inputType="number"
                     id="repetitions"
                     minValue="1"
                     value={reps}
@@ -69,9 +80,9 @@ function WorkoutConfig() {
                 />
                 <Inputs
                     label="Countdown Timer (seconds)"
-                    inputType="tel"
+                    inputType="number"
                     id="countdown"
-                    minValue="3"
+                    minValue="5"
                     value={countdown}
                     handleDecrementBtn={() =>
                         countdown === 5
@@ -81,9 +92,17 @@ function WorkoutConfig() {
                     handleIncrementBtn={() => setCountdown((prev) => prev + 1)}
                     handleInput={(e) => setCountdown(Number(e.target.value))}
                 />
-                <button className="m-5 border border-slate-950 bg-green-700 p-2 text-white">
+                <button className="m-3 border border-slate-950 bg-green-700 p-2 text-white">
                     Start Workout{' '}
                 </button>
+                {token && (
+                    <button
+                        onClick={(e) => saveToFavourites(e)}
+                        className="m-3 border border-slate-950 bg-blue-900 p-2 text-white"
+                    >
+                        Add To Favourites{' '}
+                    </button>
+                )}
             </form>
         </>
     );
