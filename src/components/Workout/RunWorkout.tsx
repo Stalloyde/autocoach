@@ -9,16 +9,11 @@ import {
 } from '../../helpers/playAudio';
 import { useNavigate } from 'react-router';
 import { formatTime } from '../../helpers/formatTime';
+import WorkoutDetails from '../../sub-components/WorkoutDetails';
 
 function RunWorkout() {
-    const {
-        reps,
-        repInterval,
-        waves,
-        displayInterval,
-        waveInterval,
-        setCountdown,
-    } = useContext(InputStateContext);
+    const { reps, repInterval, waves, waveInterval, setCountdown } =
+        useContext(InputStateContext);
     const navigate = useNavigate();
 
     const [currentCountdown, setCurrentCountdown] = useState(waveInterval);
@@ -96,31 +91,7 @@ function RunWorkout() {
                 <div className="grid justify-center text-[150px]">
                     <div>{currentCountdown}</div>
                 </div>
-                <div className="border border-slate-950 text-center text-[20px]">
-                    <h2 className="underline">Workout Details</h2>
-                    <div className="grid grid-cols-[2fr_1fr]">
-                        <div className="grid justify-end">
-                            Number of Repetitions:
-                        </div>
-                        <div>{reps}</div>
-                    </div>
-                    <div className="grid grid-cols-[2fr_1fr]">
-                        <div className="grid justify-end">
-                            Interval per Repetition:
-                        </div>
-                        <div>{displayInterval}</div>
-                    </div>
-                    <div className="grid grid-cols-[2fr_1fr]">
-                        <div className="grid justify-end">Number of Waves:</div>
-                        <div>{waves}</div>
-                    </div>
-                    <div className="grid grid-cols-[2fr_1fr]">
-                        <div className="grid justify-end">
-                            Interval between Waves:
-                        </div>
-                        <div>{waveInterval}</div>
-                    </div>
-                </div>
+                <WorkoutDetails />
             </div>
         </>
     );

@@ -1,21 +1,15 @@
 import { useState, useContext } from 'react';
 import { InputStateContext } from '../../../App';
 import AddToFavouritesSuccessModal from './AddToFavouritesSuccessModal';
+import WorkoutDetails from '../../../sub-components/WorkoutDetails';
 
 function AddToFavouritesModal({ setAddingToFavourites }) {
     const [workoutName, setWorkoutName] = useState('');
     const [error, setError] = useState('');
     const [addToFavouritesSuccess, setAddToFavouritesSuccess] = useState(false);
 
-    const {
-        reps,
-        repInterval,
-        displayInterval,
-        waves,
-        waveInterval,
-        countdown,
-        token,
-    } = useContext(InputStateContext);
+    const { reps, repInterval, waves, waveInterval, countdown, token } =
+        useContext(InputStateContext);
 
     async function handleAddToFavourites(e) {
         e.preventDefault();
@@ -80,32 +74,7 @@ function AddToFavouritesModal({ setAddingToFavourites }) {
                     </button>
                 </form>
             )}
-
-            <div className="border border-slate-950 text-center text-[20px]">
-                <h2 className="underline">Workout Details</h2>
-                <div className="grid grid-cols-[2fr_1fr]">
-                    <div className="grid justify-end">
-                        Number of Repetitions:
-                    </div>
-                    <div>{reps}</div>
-                </div>
-                <div className="grid grid-cols-[2fr_1fr]">
-                    <div className="grid justify-end">
-                        Interval per Repetition:
-                    </div>
-                    <div>{displayInterval}</div>
-                </div>
-                <div className="grid grid-cols-[2fr_1fr]">
-                    <div className="grid justify-end">Number of Waves:</div>
-                    <div>{waves}</div>
-                </div>
-                <div className="grid grid-cols-[2fr_1fr]">
-                    <div className="grid justify-end">
-                        Interval between Waves:
-                    </div>
-                    <div>{waveInterval}</div>
-                </div>
-            </div>
+            <WorkoutDetails />
         </div>
     );
 }

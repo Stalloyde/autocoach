@@ -4,17 +4,14 @@ import { InputStateContext } from '../../App';
 import { playGo, playTYM, playFiveSeconds } from '../../helpers/playAudio';
 import { useNavigate } from 'react-router';
 import { formatTime } from '../../helpers/formatTime';
+import WorkoutDetails from '../../sub-components/WorkoutDetails';
 
 function CountDown() {
     const navigate = useNavigate();
 
     const {
-        reps,
         repInterval,
-        waves,
-        waveInterval,
         countdown,
-        displayInterval,
         setDisplayInterval,
         setCountdown,
         token,
@@ -53,31 +50,7 @@ function CountDown() {
                 <div className="flex justify-center text-[150px]">
                     {countdown}
                 </div>
-                <div className="border border-slate-950 text-center text-[20px]">
-                    <h2 className="underline">Workout Details</h2>
-                    <div className="grid grid-cols-[2fr_1fr]">
-                        <div className="grid justify-end">
-                            Number of Repetitions:
-                        </div>
-                        <div>{reps}</div>
-                    </div>
-                    <div className="grid grid-cols-[2fr_1fr]">
-                        <div className="grid justify-end">
-                            Interval per Repetition:
-                        </div>
-                        <div>{displayInterval}</div>
-                    </div>
-                    <div className="grid grid-cols-[2fr_1fr]">
-                        <div className="grid justify-end">Number of Waves:</div>
-                        <div>{waves}</div>
-                    </div>
-                    <div className="grid grid-cols-[2fr_1fr]">
-                        <div className="grid justify-end">
-                            Interval between Waves:
-                        </div>
-                        <div>{waveInterval}</div>
-                    </div>
-                </div>
+                <WorkoutDetails />
             </div>
         </>
     );
