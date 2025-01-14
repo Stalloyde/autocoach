@@ -8,7 +8,7 @@ import {
     playWorkoutCompleted,
 } from '../../helpers/playAudio';
 import { useNavigate } from 'react-router';
-import { FormatTime } from '../../helpers/FormatTime';
+import { formatTime } from '../../helpers/formatTime';
 
 function RunWorkout() {
     const {
@@ -30,7 +30,7 @@ function RunWorkout() {
 
     //rep management
     useEffect(() => {
-        setFormattedCurrentRepInterval(FormatTime(currentRepInterval));
+        setFormattedCurrentRepInterval(formatTime(currentRepInterval));
         if (repInterval < 1) navigate('/');
 
         const interval = setInterval(() => {

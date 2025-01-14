@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { InputStateContext } from '../App';
-import { FormatTime } from '../helpers/FormatTime';
+import { formatTime } from '../helpers/formatTime';
 
 const TimeInput = ({ setRepInterval }) => {
     const { displayInterval, setDisplayInterval, repInterval } =
@@ -18,7 +18,7 @@ const TimeInput = ({ setRepInterval }) => {
     };
 
     useEffect(() => {
-        const formattedTime = FormatTime(repInterval);
+        const formattedTime = formatTime(repInterval);
         setDisplayInterval(formattedTime);
     }, []);
 

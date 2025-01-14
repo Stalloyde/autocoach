@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { InputStateContext } from '../../App';
 import { playGo, playTYM, playFiveSeconds } from '../../helpers/playAudio';
 import { useNavigate } from 'react-router';
-import { FormatTime } from '../../helpers/FormatTime';
+import { formatTime } from '../../helpers/formatTime';
 
 function CountDown() {
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ function CountDown() {
 
     useEffect(() => {
         if (repInterval < 1) navigate('/');
-        setDisplayInterval(FormatTime(repInterval));
+        setDisplayInterval(formatTime(repInterval));
     }, []);
 
     return (
