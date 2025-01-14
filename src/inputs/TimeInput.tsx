@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { InputStateContext } from '../App';
+import { FormatTime } from '../helpers/FormatTime';
 
 const TimeInput = ({ setRepInterval }) => {
-    const [displayTime, setDisplayTime] = useState('');
+    const { displayInterval, setDisplayInterval, repInterval } =
+        useContext(InputStateContext);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let input = e.target.value.replace(/\D/g, '');
@@ -10,9 +13,14 @@ const TimeInput = ({ setRepInterval }) => {
         const seconds = input.slice(-2) || '0';
         const rawTime = Number(minutes) * 60 + Number(seconds);
         const formattedTime = `${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
-        setDisplayTime(formattedTime);
+        setDisplayInterval(formattedTime);
         setRepInterval(rawTime);
     };
+
+    useEffect(() => {
+        const formattedTime = FormatTime(repInterval);
+        setDisplayInterval(formattedTime);
+    }, []);
 
     return (
         <div className="m-3 p-2">
@@ -23,7 +31,7 @@ const TimeInput = ({ setRepInterval }) => {
                     required
                     id="timeInput"
                     type="text"
-                    value={displayTime}
+                    value={displayInterval}
                     onChange={handleInputChange}
                     placeholder="MM:SS"
                 />

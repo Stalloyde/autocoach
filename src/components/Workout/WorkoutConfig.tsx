@@ -1,10 +1,12 @@
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { InputStateContext } from '../../App';
 import Inputs from '../../inputs/Inputs';
 import TimeInput from '../../inputs/TimeInput';
 import { useNavigate } from 'react-router';
+import AddToFavouritesModal from './AddToFavourites/AddToFavouritesModal';
 
 function WorkoutConfig() {
+    const [addingToFavourites, setAddingToFavourites] = useState(false);
     const {
         reps,
         setReps,
@@ -21,89 +23,109 @@ function WorkoutConfig() {
 
     let navigate = useNavigate();
 
-    function handleStartWorkout(e) {
+    function handleAddingToFavourites(e) {
         e.preventDefault();
-        token ? navigate(`/countdown/${currentUser}`) : navigate('/countdown');
+
+        if (repInterval > 0) setAddingToFavourites(true);
     }
 
-    function saveToFavourites(e) {
+    function handleStartWorkout(e) {
         e.preventDefault();
-        console.log(reps, repInterval, waves, waveInterval, countdown);
+        if (e.nativeEvent.submitter.name === 'start-workout')
+            token
+                ? navigate(`/countdown/${currentUser}`)
+                : navigate('/countdown');
+
+        if (e.nativeEvent.submitter.name === 'add-to-favourites')
+            handleAddingToFavourites(e);
     }
 
     useEffect(() => {
-        token ? navigate(`/${currentUser}`) : null;
+        token ? navigate(`/${currentUser}`) : navigate(`/`);
     }, []);
 
     return (
         <>
-            <form
-                action="POST"
-                onSubmit={(e) => handleStartWorkout(e)}
-                className="grid justify-center p-2"
-            >
-                <Inputs
-                    label="# of Repetition"
-                    inputType="number"
-                    id="repetitions"
-                    minValue="1"
-                    value={reps}
-                    handleDecrementBtn={() =>
-                        reps > 1 ? setReps(reps - 1) : null
-                    }
-                    handleIncrementBtn={() => setReps((prev) => prev + 1)}
-                    handleInput={(e) => setReps(Number(e.target.value))}
+            {addingToFavourites && repInterval ? (
+                <AddToFavouritesModal
+                    setAddingToFavourites={setAddingToFavourites}
                 />
-                <TimeInput setRepInterval={setRepInterval} />
-                <Inputs
-                    label="# of Waves"
-                    inputType="number"
-                    id="waves"
-                    value={waves}
-                    minValue="2"
-                    maxValue={repInterval / waveInterval - 1}
-                    handleDecrementBtn={() =>
-                        waves > 2 ? setWaves(waves - 1) : null
-                    }
-                    handleIncrementBtn={() => setWaves((prev) => prev + 1)}
-                    handleInput={(e) => setWaves(Number(e.target.value))}
-                />
-                <Inputs
-                    label="Interval between Waves (seconds)"
-                    fixed={true}
-                    inputType="tel"
-                    id="intervalWave"
-                    defaultValue={waveInterval}
-                    disableTyping={(e) => {
-                        e.preventDefault();
-                    }}
-                />
-                <Inputs
-                    label="Countdown Timer (seconds)"
-                    inputType="number"
-                    id="countdown"
-                    minValue="5"
-                    value={countdown}
-                    handleDecrementBtn={() =>
-                        countdown === 5
-                            ? null
-                            : setCountdown((prev) => prev - 1)
-                    }
-                    handleIncrementBtn={() => setCountdown((prev) => prev + 1)}
-                    handleInput={(e) => setCountdown(Number(e.target.value))}
-                />
-                <button className="m-3 border border-slate-950 bg-green-700 p-2 text-white">
-                    Start Workout{' '}
-                </button>
-                {token && (
+            ) : (
+                <form
+                    action="POST"
+                    onSubmit={(e) => handleStartWorkout(e)}
+                    className="grid justify-center p-2"
+                >
+                    <Inputs
+                        label="# of Repetition"
+                        inputType="number"
+                        id="repetitions"
+                        minValue="1"
+                        value={reps}
+                        handleDecrementBtn={() =>
+                            reps > 1 ? setReps(reps - 1) : null
+                        }
+                        handleIncrementBtn={() => setReps((prev) => prev + 1)}
+                        handleInput={(e) => setReps(Number(e.target.value))}
+                    />
+                    <TimeInput setRepInterval={setRepInterval} />
+                    <Inputs
+                        label="# of Waves"
+                        inputType="number"
+                        id="waves"
+                        value={waves}
+                        minValue="2"
+                        maxValue={repInterval / waveInterval - 1}
+                        handleDecrementBtn={() =>
+                            waves > 2 ? setWaves(waves - 1) : null
+                        }
+                        handleIncrementBtn={() => setWaves((prev) => prev + 1)}
+                        handleInput={(e) => setWaves(Number(e.target.value))}
+                    />
+                    <Inputs
+                        label="Interval between Waves (seconds)"
+                        fixed={true}
+                        inputType="tel"
+                        id="intervalWave"
+                        defaultValue={waveInterval}
+                        disableTyping={(e) => {
+                            e.preventDefault();
+                        }}
+                    />
+                    <Inputs
+                        label="Countdown Timer (seconds)"
+                        inputType="number"
+                        id="countdown"
+                        minValue="5"
+                        value={countdown}
+                        handleDecrementBtn={() =>
+                            countdown === 5
+                                ? null
+                                : setCountdown((prev) => prev - 1)
+                        }
+                        handleIncrementBtn={() =>
+                            setCountdown((prev) => prev + 1)
+                        }
+                        handleInput={(e) =>
+                            setCountdown(Number(e.target.value))
+                        }
+                    />
                     <button
-                        onClick={(e) => saveToFavourites(e)}
-                        className="m-3 border border-slate-950 bg-blue-900 p-2 text-white"
+                        name="start-workout"
+                        className="m-3 border border-slate-950 bg-green-700 p-2 text-white"
                     >
-                        Add To Favourites{' '}
+                        Start Workout{' '}
                     </button>
-                )}
-            </form>
+                    {token && (
+                        <button
+                            name="add-to-favourites"
+                            className="m-3 border border-slate-950 bg-blue-900 p-2 text-white"
+                        >
+                            Add To Favourites{' '}
+                        </button>
+                    )}
+                </form>
+            )}
         </>
     );
 }
