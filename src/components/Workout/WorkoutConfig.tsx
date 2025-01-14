@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { InputStateContext } from '../../App';
-import Inputs from '../../inputs/Inputs';
-import TimeInput from '../../inputs/TimeInput';
+import Inputs from '../../sub-components/Inputs';
+import TimeInput from '../../sub-components/TimeInput';
 import { useNavigate } from 'react-router';
 import AddToFavouritesModal from './AddToFavourites/AddToFavouritesModal';
 
