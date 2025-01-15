@@ -8,8 +8,15 @@ function AddToFavouritesModal({ setAddingToFavourites }) {
     const [error, setError] = useState('');
     const [addToFavouritesSuccess, setAddToFavouritesSuccess] = useState(false);
 
-    const { reps, repInterval, waves, waveInterval, countdown, token } =
-        useContext(InputStateContext);
+    const {
+        reps,
+        repInterval,
+        waves,
+        waveInterval,
+        countdown,
+        token,
+        setCurrentUser,
+    } = useContext(InputStateContext);
 
     async function handleAddToFavourites(e) {
         e.preventDefault();
@@ -34,6 +41,7 @@ function AddToFavouritesModal({ setAddingToFavourites }) {
             setError(responseData.workoutNameError);
         } else {
             setAddToFavouritesSuccess(true);
+            setCurrentUser(responseData);
         }
     }
 

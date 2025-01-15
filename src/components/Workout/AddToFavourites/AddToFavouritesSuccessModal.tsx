@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { InputStateContext } from '../../../App';
 
 function AddToFavouritesSuccessModal({ setAddingToFavourites }) {
-    const { token, currentUser } = useContext(InputStateContext);
+    const { currentUser } = useContext(InputStateContext);
 
     return (
         <>
@@ -12,23 +12,13 @@ function AddToFavouritesSuccessModal({ setAddingToFavourites }) {
                     Your workout has been successfully saved!
                 </h2>
 
-                {token ? (
-                    <Link
-                        to={`/${currentUser}`}
-                        onClick={() => setAddingToFavourites(false)}
-                        className="m-3 border-slate-950 bg-green-700 p-2 text-white"
-                    >
-                        <em className="underline">Return to workout</em>
-                    </Link>
-                ) : (
-                    <Link
-                        to="/"
-                        onClick={() => setAddingToFavourites(false)}
-                        className="m-3 border-slate-950 bg-green-700 p-2 text-white"
-                    >
-                        <em className="underline">Return to workout</em>
-                    </Link>
-                )}
+                <Link
+                    to={`/countdown/${currentUser.username}`}
+                    onClick={() => setAddingToFavourites(false)}
+                    className="m-3 border-slate-950 bg-green-700 p-2 text-white"
+                >
+                    <em className="underline">Start workout</em>
+                </Link>
             </div>
         </>
     );

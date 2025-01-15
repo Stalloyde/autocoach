@@ -53,3 +53,7 @@ export default tseslint.config({
 https://elevenlabs.io/app/speech-synthesis/text-to-speech
 
 <a href="https://www.vecteezy.com/free-vector/home-icon">Home Icon Vectors by Vecteezy</a>
+
+<a href="https://www.vecteezy.com/free-vector/settings">Settings Vectors by Vecteezy</a>
+
+<a href="https://www.vecteezy.com/free-vector/hamburger-menu">Hamburger Menu Vectors by Vecteezy</a>

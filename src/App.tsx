@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import Header from './components/Header';
 import CountDown from './components/Workout/CountDown';
 import WorkoutConfig from './components/Workout/WorkoutConfig';
@@ -15,7 +15,6 @@ export const InputStateContext = createContext(null);
 
 function App() {
     const jwtToken: string | undefined = Cookies.get('token');
-    const currentUserCookie: string | undefined = Cookies.get('currentUser');
     const [token, setToken] = useState(jwtToken);
     const [reps, setReps] = useState(1);
     const [repInterval, setRepInterval] = useState(0);
@@ -23,8 +22,35 @@ function App() {
     const [waveInterval, setWaveInterval] = useState(10);
     const [displayInterval, setDisplayInterval] = useState('');
     const [countdown, setCountdown] = useState(5);
-    const [currentUser, setCurrentUser] = useState(currentUserCookie);
+    const [currentUser, setCurrentUser] = useState({});
+    const [loading, setLoading] = useState(true);
 
+    async function fetchCurrentUser() {
+        const response = await fetch('http://localhost:3000', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            },
+        });
+
+        const responseData = await response.json();
+        setCurrentUser(responseData);
+        setLoading(false);
+        return;
+    }
+
+    useEffect(() => {
+        if (token) fetchCurrentUser();
+    }, []);
+
+    if (loading && token) {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <p>Loading...</p>
+            </div>
+        );
+    }
     return (
         <InputStateContext.Provider
             value={{
@@ -44,6 +70,7 @@ function App() {
                 setToken,
                 currentUser,
                 setCurrentUser,
+                setLoading,
             }}
         >
             <div className="grid h-screen grid-rows-10">

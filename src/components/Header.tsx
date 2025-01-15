@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Link } from 'react-router';
-import HomeIcon from '../assets/home-icon.jpg';
 import { InputStateContext } from '../App';
 import SettingsIcon from '../assets/settings-icon.jpg';
+import FavouritesMenu from '../sub-components/Favourites-menu';
 
 function Header() {
     const { token, currentUser } = useContext(InputStateContext);
@@ -10,30 +10,18 @@ function Header() {
     return (
         <div className="grid grid-cols-[1fr_4fr_1fr] border border-slate-950 p-2">
             {token ? (
-                <Link to={`/${currentUser}`}>
-                    <div className="content-center p-2">
-                        <img
-                            src={HomeIcon}
-                            alt="home"
-                            width="40px"
-                            height="40px"
-                        />
-                    </div>
-                </Link>
+                <div className="content-center p-2">
+                    <FavouritesMenu />
+                </div>
             ) : (
-                <Link to="/">
-                    <div className="content-center p-2">
-                        <img
-                            src={HomeIcon}
-                            alt="home"
-                            width="40px"
-                            height="40px"
-                        />
-                    </div>
-                </Link>
+                <div></div>
             )}
             <h1 className="grid content-center justify-center p-2 text-2xl font-extrabold">
-                AUTO-GO
+                {token ? (
+                    <Link to={`/${currentUser.username}`}>AUTO-GO</Link>
+                ) : (
+                    <Link to="/">AUTO-GO</Link>
+                )}
             </h1>
             {!token ? (
                 <div className="grid content-center justify-center">

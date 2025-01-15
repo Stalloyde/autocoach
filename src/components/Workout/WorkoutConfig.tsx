@@ -25,7 +25,6 @@ function WorkoutConfig() {
 
     function handleAddingToFavourites(e) {
         e.preventDefault();
-
         if (repInterval > 0) setAddingToFavourites(true);
     }
 
@@ -33,7 +32,7 @@ function WorkoutConfig() {
         e.preventDefault();
         if (e.nativeEvent.submitter.name === 'start-workout')
             token
-                ? navigate(`/countdown/${currentUser}`)
+                ? navigate(`/countdown/${currentUser.username}`)
                 : navigate('/countdown');
 
         if (e.nativeEvent.submitter.name === 'add-to-favourites')
@@ -41,7 +40,7 @@ function WorkoutConfig() {
     }
 
     useEffect(() => {
-        token ? navigate(`/${currentUser}`) : navigate(`/`);
+        token ? navigate(`/${currentUser.username}`) : navigate(`/`);
     }, []);
 
     return (
