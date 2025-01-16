@@ -24,6 +24,7 @@ function App() {
     const [countdown, setCountdown] = useState(5);
     const [currentUser, setCurrentUser] = useState({});
     const [loading, setLoading] = useState(true);
+    const [addingToFavourites, setAddingToFavourites] = useState(false);
 
     async function fetchCurrentUser() {
         const response = await fetch('http://localhost:3000', {
@@ -71,6 +72,8 @@ function App() {
                 currentUser,
                 setCurrentUser,
                 setLoading,
+                addingToFavourites,
+                setAddingToFavourites,
             }}
         >
             <div className="grid h-screen grid-rows-10">

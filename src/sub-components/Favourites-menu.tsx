@@ -3,11 +3,24 @@ import { InputStateContext } from '../App';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { formatTime } from '../helpers/formatTime';
+import { useNavigate } from 'react-router';
 
 export default function FavouritesMenu() {
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-    const { currentUser } = useContext(InputStateContext);
+    const {
+        currentUser,
+        setReps,
+        setRepInterval,
+        setWaves,
+        setWaveInterval,
+        setCountdown,
+        setDisplayInterval,
+        addingToFavourites,
+        setAddingToFavourites,
+    } = useContext(InputStateContext);
     const { workouts } = currentUser;
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -16,6 +29,18 @@ export default function FavouritesMenu() {
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleQuickStart = (workout) => {
+        setReps(Number(workout.reps));
+        setRepInterval(Number(workout.repInterval));
+        setDisplayInterval(formatTime(workout.repInterval));
+        setWaves(Number(workout.waves));
+        setWaveInterval(Number(workout.waveInterval));
+        setCountdown(Number(workout.countdown));
+        if (addingToFavourites) setAddingToFavourites(false);
+        setAnchorEl(null);
+        navigate(`/${currentUser.username}`);
     };
 
     return (
@@ -37,7 +62,7 @@ export default function FavouritesMenu() {
                     },
                 }}
             >
-                Quick Start Favourites
+                Favourites
             </Button>
             <Menu
                 id="basic-menu"
@@ -62,7 +87,10 @@ export default function FavouritesMenu() {
             >
                 {workouts &&
                     workouts.map((workout) => (
-                        <MenuItem onClick={handleClose} key={workout.id}>
+                        <MenuItem
+                            onClick={() => handleQuickStart(workout)}
+                            key={workout.id}
+                        >
                             {workout.workoutName}
                         </MenuItem>
                     ))}

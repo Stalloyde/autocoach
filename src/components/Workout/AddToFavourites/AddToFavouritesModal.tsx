@@ -3,7 +3,7 @@ import { InputStateContext } from '../../../App';
 import AddToFavouritesSuccessModal from './AddToFavouritesSuccessModal';
 import WorkoutDetails from '../../../sub-components/WorkoutDetails';
 
-function AddToFavouritesModal({ setAddingToFavourites }) {
+function AddToFavouritesModal() {
     const [workoutName, setWorkoutName] = useState('');
     const [error, setError] = useState('');
     const [addToFavouritesSuccess, setAddToFavouritesSuccess] = useState(false);
@@ -16,6 +16,7 @@ function AddToFavouritesModal({ setAddingToFavourites }) {
         countdown,
         token,
         setCurrentUser,
+        setAddingToFavourites,
     } = useContext(InputStateContext);
 
     async function handleAddToFavourites(e) {
@@ -48,9 +49,7 @@ function AddToFavouritesModal({ setAddingToFavourites }) {
     return (
         <div className="grid items-center justify-center">
             {addToFavouritesSuccess ? (
-                <AddToFavouritesSuccessModal
-                    setAddingToFavourites={setAddingToFavourites}
-                />
+                <AddToFavouritesSuccessModal />
             ) : (
                 <form
                     method="post"

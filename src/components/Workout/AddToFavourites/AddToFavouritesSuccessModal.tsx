@@ -2,8 +2,9 @@ import { Link } from 'react-router';
 import { useContext } from 'react';
 import { InputStateContext } from '../../../App';
 
-function AddToFavouritesSuccessModal({ setAddingToFavourites }) {
-    const { currentUser } = useContext(InputStateContext);
+function AddToFavouritesSuccessModal() {
+    const { currentUser, setAddingToFavourites } =
+        useContext(InputStateContext);
 
     return (
         <>

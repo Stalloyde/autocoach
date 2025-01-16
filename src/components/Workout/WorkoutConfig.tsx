@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router';
 import AddToFavouritesModal from './AddToFavourites/AddToFavouritesModal';
 
 function WorkoutConfig() {
-    const [addingToFavourites, setAddingToFavourites] = useState(false);
     const {
         reps,
         setReps,
@@ -19,6 +18,8 @@ function WorkoutConfig() {
         setCountdown,
         token,
         currentUser,
+        addingToFavourites,
+        setAddingToFavourites,
     } = useContext(InputStateContext);
 
     let navigate = useNavigate();
@@ -46,9 +47,7 @@ function WorkoutConfig() {
     return (
         <>
             {addingToFavourites && repInterval ? (
-                <AddToFavouritesModal
-                    setAddingToFavourites={setAddingToFavourites}
-                />
+                <AddToFavouritesModal />
             ) : (
                 <form
                     action="POST"
