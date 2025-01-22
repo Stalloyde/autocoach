@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { InputStateContext } from '../../App';
 import Inputs from '../../sub-components/Inputs';
 import TimeInput from '../../sub-components/TimeInput';
