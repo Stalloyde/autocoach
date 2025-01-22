@@ -2,10 +2,12 @@ import { useState, useContext } from 'react';
 import { InputStateContext } from '../../../App';
 import AddToFavouritesSuccessModal from './AddToFavouritesSuccessModal';
 import WorkoutDetails from '../../../sub-components/WorkoutDetails';
+import OverwriteFavouritesModal from './OverwriteFavouritesModal';
+import SaveCancelBtn from '../../../sub-components/SaveCancelBtn';
 
 function AddToFavouritesModal() {
     const [workoutName, setWorkoutName] = useState('');
-    const [error, setError] = useState('');
+    const [oldWorkoutName, setOldWorkoutName] = useState('');
     const [addToFavouritesSuccess, setAddToFavouritesSuccess] = useState(false);
 
     const {
@@ -39,7 +41,7 @@ function AddToFavouritesModal() {
         });
         const responseData = await response.json();
         if (responseData.workoutNameError) {
-            setError(responseData.workoutNameError);
+            setOldWorkoutName(responseData.workoutNameError);
         } else {
             setAddToFavouritesSuccess(true);
             setCurrentUser(responseData);
@@ -50,6 +52,13 @@ function AddToFavouritesModal() {
         <div className="grid items-center justify-center">
             {addToFavouritesSuccess ? (
                 <AddToFavouritesSuccessModal />
+            ) : oldWorkoutName ? (
+                <OverwriteFavouritesModal
+                    oldWorkoutName={oldWorkoutName}
+                    setOldWorkoutName={setOldWorkoutName}
+                    setAddToFavouritesSuccess={setAddToFavouritesSuccess}
+                    workoutName={workoutName}
+                />
             ) : (
                 <form
                     method="post"
@@ -66,19 +75,17 @@ function AddToFavouritesModal() {
                             placeholder="Workout Name"
                             onChange={(e) => setWorkoutName(e.target.value)}
                         />
-                        <p className="text-xs italic text-red-600">{error}</p>
                     </div>
-                    <button className="m-3 border-slate-950 bg-green-700 p-2 text-white">
-                        Save
-                    </button>
-                    <button
-                        onClick={() => {
-                            setAddingToFavourites(false);
-                        }}
-                        className="m-3 border-slate-950 bg-red-700 p-2 text-white"
-                    >
-                        Cancel
-                    </button>
+                    <SaveCancelBtn
+                        type={'save'}
+                        setAddingToFavourites={null}
+                        handleOverWriteFavourites={null}
+                    />
+                    <SaveCancelBtn
+                        type="button"
+                        setAddingToFavourites={setAddingToFavourites}
+                        handleOverWriteFavourites={null}
+                    />
                 </form>
             )}
             <WorkoutDetails />
