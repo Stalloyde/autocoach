@@ -6,10 +6,11 @@ import FavouritesMenu from '../sub-components/Favourites-menu';
 
 function Header() {
     const { token, currentUser } = useContext(InputStateContext);
+    console.log(currentUser);
 
     return (
         <div className="grid grid-cols-[1fr_4fr_1fr] border border-slate-950 p-2">
-            {token ? (
+            {token && currentUser.workouts.length > 0 ? (
                 <div className="content-center p-2">
                     <FavouritesMenu />
                 </div>
