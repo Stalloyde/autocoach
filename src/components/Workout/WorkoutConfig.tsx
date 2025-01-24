@@ -52,7 +52,7 @@ function WorkoutConfig() {
                 <form
                     action="POST"
                     onSubmit={(e) => handleStartWorkout(e)}
-                    className="grid justify-center p-2"
+                    className="grid justify-center p-1"
                 >
                     <Inputs
                         label="# of Repetition"
@@ -110,14 +110,14 @@ function WorkoutConfig() {
                     />
                     <button
                         name="start-workout"
-                        className="m-3 border border-slate-950 bg-green-700 p-2 text-white"
+                        className="m-1 border border-slate-950 bg-green-700 p-2 text-white underline"
                     >
                         Start Workout{' '}
                     </button>
                     {token && (
                         <button
                             name="add-to-favourites"
-                            className="m-3 border border-slate-950 bg-blue-900 p-2 text-white"
+                            className="m-1 border border-slate-950 bg-blue-900 p-2 text-white underline"
                         >
                             Add To Favourites{' '}
                         </button>

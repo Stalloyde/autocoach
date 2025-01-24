@@ -79,9 +79,9 @@ function RunWorkout() {
 
     return (
         <>
-            <div className="grid grid-rows-[1fr_1fr_1fr] items-center justify-center">
+            <div className="grid grid-rows-[0.5fr_1fr_1fr] items-center justify-center">
                 <div>
-                    <div className="text-center text-[50px]">
+                    <div className="text-center text-[40px]">
                         Current Time: {formattedCurrentRepInterval}
                     </div>
                     <div className="text-center text-[20px]">

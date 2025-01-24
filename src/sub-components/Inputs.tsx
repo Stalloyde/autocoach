@@ -14,14 +14,14 @@ function Inputs({
     fixed,
 }) {
     return (
-        <div className="m-3 p-2">
+        <div className="m-1 p-1">
             <label htmlFor={id} className="grid">
                 {label}
             </label>
-            <div className="relative w-72 outline outline-1">
+            <div className="relative w-60 outline outline-1">
                 {fixed ? (
                     <input
-                        className="w-72 p-1 text-center"
+                        className="w-60 p-1 text-center"
                         required
                         onKeyDown={disableTyping}
                         onWheel={(e) => e.target.blur()}
@@ -44,7 +44,7 @@ function Inputs({
                             -
                         </button>
                         <input
-                            className="w-52 p-1 text-center"
+                            className="w-40 p-1 text-center"
                             required
                             onKeyDown={disableTyping}
                             onWheel={(e) => e.target.blur()}
