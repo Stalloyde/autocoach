@@ -20,6 +20,13 @@ function AddToFavouritesSuccessModal() {
                 >
                     <em className="underline">Start workout</em>
                 </Link>
+                <Link
+                    to={`/${currentUser.username}`}
+                    onClick={() => setAddingToFavourites(false)}
+                    className="m-3 border-slate-950 bg-red-700 p-2 text-white"
+                >
+                    <em className="underline">Return to setup</em>
+                </Link>
             </div>
         </>
     );
