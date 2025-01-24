@@ -74,6 +74,7 @@ function AddToFavouritesModal() {
                             value={workoutName}
                             placeholder="Workout Name"
                             onChange={(e) => setWorkoutName(e.target.value)}
+                            required
                         />
                     </div>
                     <SaveCancelBtn
