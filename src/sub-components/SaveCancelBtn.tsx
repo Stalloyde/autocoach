@@ -7,14 +7,14 @@ function SaveCancelBtn({
         return (
             <button
                 onClick={handleOverWriteFavourites}
-                className="m-3 border-slate-950 bg-green-700 p-2 text-white"
+                className="m-1 border-slate-950 bg-green-700 p-2 text-white underline"
             >
                 Save
             </button>
         );
     } else if (type === 'save') {
         return (
-            <button className="m-3 border-slate-950 bg-green-700 p-2 text-white">
+            <button className="m-1 border-slate-950 bg-green-700 p-2 text-white underline">
                 Save
             </button>
         );
@@ -24,7 +24,7 @@ function SaveCancelBtn({
                 onClick={() => {
                     setAddingToFavourites(false);
                 }}
-                className="m-3 border-slate-950 bg-red-700 p-2 text-white"
+                className="m-1 border-slate-950 bg-red-700 p-2 text-white underline"
             >
                 Cancel
             </button>

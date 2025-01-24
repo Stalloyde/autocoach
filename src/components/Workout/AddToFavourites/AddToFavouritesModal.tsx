@@ -63,12 +63,12 @@ function AddToFavouritesModal() {
                 <form
                     method="post"
                     onSubmit={(e) => handleAddToFavourites(e)}
-                    className="m-3 grid justify-center p-2 align-middle"
+                    className="m-1 grid justify-center p-1 align-middle"
                 >
-                    <div className="m-3 grid p-2">
+                    <div className="m-1 grid p-1">
                         <label htmlFor="workoutName">Save workout as:</label>
                         <input
-                            className="relative w-72 p-2 outline outline-1"
+                            className="relative w-60 p-1 outline outline-1"
                             type="text"
                             id="workoutName"
                             value={workoutName}

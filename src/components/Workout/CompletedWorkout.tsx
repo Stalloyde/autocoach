@@ -16,7 +16,7 @@ function CompletedWorkout() {
 
                 <button
                     onClick={startNewWorkout}
-                    className="m-5 border border-slate-950 bg-green-700 p-2 text-white"
+                    className="m-5 border border-slate-950 bg-green-700 p-2 text-white underline"
                 >
                     Start New Workout
                 </button>

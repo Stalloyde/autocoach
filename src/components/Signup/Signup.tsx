@@ -11,8 +11,6 @@ function Signup() {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [signUpSuccess, setSignUpSuccess] = useState(false);
 
-    const navigate = useNavigate();
-
     function handleUsernameInput(e) {
         setUsernameValue(e.target.value);
     }
@@ -63,17 +61,17 @@ function Signup() {
                 <SignUpSuccessModal />
             ) : (
                 <form action="POST" onSubmit={handleSignup}>
-                    <div className="m-3 p-2">
+                    <div className="m-1 p-1">
                         <h2 className="font-extrabold">
                             Sign up for an account
                         </h2>
                     </div>
-                    <div className="m-3 p-2">
+                    <div className="m-1 p-1">
                         <label htmlFor="username">Username: </label>
-                        <div className="relative w-72 outline outline-1">
+                        <div className="relative w-60 outline outline-1">
                             <input
                                 required
-                                className="w-72 p-1"
+                                className="w-60 p-1"
                                 id="username"
                                 onChange={(e) => handleUsernameInput(e)}
                             />
@@ -82,13 +80,13 @@ function Signup() {
                             {usernameError}
                         </p>
                     </div>
-                    <div className="m-3 p-2">
+                    <div className="m-1 p-1">
                         <label htmlFor="password">Password: </label>
-                        <div className="relative w-72 outline outline-1">
+                        <div className="relative w-60 outline outline-1">
                             <input
                                 required
                                 type="password"
-                                className="w-72 p-1"
+                                className="w-60 p-1"
                                 id="password"
                                 onChange={(e) => handlePasswordInput(e)}
                             />
@@ -98,15 +96,15 @@ function Signup() {
                         </p>
                     </div>
 
-                    <div className="m-3 p-2">
+                    <div className="m-1 p-1">
                         <label htmlFor="confirmPassword">
                             Confirm Password:{' '}
                         </label>
-                        <div className="relative w-72 outline outline-1">
+                        <div className="relative w-60 outline outline-1">
                             <input
                                 required
                                 type="password"
-                                className="w-72 p-1"
+                                className="w-60 p-1"
                                 id="confirmPassword"
                                 onChange={(e) => handleConfirmPasswordInput(e)}
                             />
@@ -115,12 +113,12 @@ function Signup() {
                             {confirmPasswordError}
                         </p>
                     </div>
-                    <div className="m-3 p-2 text-center">
-                        <button className="m-5 border border-slate-950 bg-green-700 p-2 text-white">
+                    <div className="m-1 p-1 text-center">
+                        <button className="m-5 border border-slate-950 bg-green-700 p-2 text-white underline">
                             Sign Up
                         </button>
                     </div>
-                    <div className="m-3 p-2 text-center italic">
+                    <div className="m-1 p-1 text-center italic">
                         Already have an account?{' '}
                         <Link
                             to="/login"

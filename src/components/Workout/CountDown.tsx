@@ -44,7 +44,7 @@ function CountDown() {
     return (
         <>
             <div className="grid items-center justify-center">
-                <div className="text-center text-[50px]">
+                <div className="text-center text-[40px]">
                     Workout starting in:
                 </div>
                 <div className="flex justify-center text-[150px]">

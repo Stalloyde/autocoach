@@ -63,15 +63,15 @@ function Login() {
     return (
         <div className="grid content-center justify-center">
             <form action="POST" onSubmit={(e) => handleLogin(e)}>
-                <div className="m-3 p-2">
+                <div className="m-1 p-1">
                     <h2 className="font-extrabold">Log in to your account</h2>
                 </div>
-                <div className="m-3 p-2">
+                <div className="m-1 p-1">
                     <label htmlFor="username">Username: </label>
-                    <div className="relative w-72 outline outline-1">
+                    <div className="relative w-60 outline outline-1">
                         <input
                             required
-                            className="w-72 p-1"
+                            className="w-60 p-1"
                             id="username"
                             onChange={(e) => handleUsernameInput(e)}
                         />
@@ -80,14 +80,14 @@ function Login() {
                         {usernameError}
                     </p>
                 </div>
-                <div className="m-3 p-2">
+                <div className="m-1 p-1">
                     <label htmlFor="password">Password: </label>
-                    <div className="relative w-72 outline outline-1">
+                    <div className="relative w-60 outline outline-1">
                         <input
                             required
                             type="password"
                             id="password"
-                            className="w-72 p-1"
+                            className="w-60 p-1"
                             onChange={(e) => handlePasswordInput(e)}
                         />
                     </div>
@@ -96,12 +96,12 @@ function Login() {
                     </p>
                 </div>
 
-                <div className="m-3 p-2 text-center">
-                    <button className="m-5 border border-slate-950 bg-green-700 p-2 text-white">
+                <div className="m-1 p-1 text-center">
+                    <button className="m-5 border border-slate-950 bg-green-700 p-2 text-white underline">
                         Log In
                     </button>
                 </div>
-                <div className="m-3 p-2 text-center italic">
+                <div className="m-1 p-1 text-center italic">
                     Don't have an account?{' '}
                     <Link
                         to="/sign-up"

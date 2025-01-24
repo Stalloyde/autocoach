@@ -3,6 +3,7 @@ import { InputStateContext } from '../App';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import FavouritesIcon from '../assets/favourites-icon.png';
 import { formatTime } from '../helpers/formatTime';
 import { useNavigate } from 'react-router';
 
@@ -62,7 +63,12 @@ export default function FavouritesMenu() {
                     },
                 }}
             >
-                Favourites
+                <img
+                    src={FavouritesIcon}
+                    alt="favourites"
+                    width="30px"
+                    height="30px"
+                />
             </Button>
             <Menu
                 id="basic-menu"
@@ -74,9 +80,9 @@ export default function FavouritesMenu() {
                 }}
                 sx={{
                     fontFamily: 'inherit',
-                    margin: '21px -20px',
+                    margin: '10px -20px',
                     '.MuiPaper-root': {
-                        width: '250px',
+                        width: '100px',
                         backgroundColor: '#1E3A8A',
                         color: 'white',
                         borderRadius: '0',

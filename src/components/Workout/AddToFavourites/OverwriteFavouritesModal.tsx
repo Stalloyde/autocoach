@@ -67,7 +67,7 @@ function OverwriteFavourites({
                         <em>This action will not be reversible</em>
                     </div>
 
-                    <div className="flex justify-end">
+                    <div className="grid">
                         <SaveCancelBtn
                             type={'save'}
                             setAddingToFavourites={null}

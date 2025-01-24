@@ -9,15 +9,15 @@ function Header() {
     console.log(currentUser);
 
     return (
-        <div className="grid grid-cols-[1fr_4fr_1fr] border border-slate-950 p-2">
+        <div className="grid grid-cols-[1fr_2fr_1fr] border border-slate-950 p-1">
             {token && currentUser.workouts.length > 0 ? (
-                <div className="content-center p-2">
+                <div className="content-center p-1">
                     <FavouritesMenu />
                 </div>
             ) : (
                 <div></div>
             )}
-            <h1 className="grid content-center justify-center p-2 text-2xl font-extrabold">
+            <h1 className="grid content-center justify-center p-1 text-2xl font-extrabold">
                 {token ? (
                     <Link to={`/${currentUser.username}`}>AUTO-GO</Link>
                 ) : (
@@ -27,32 +27,26 @@ function Header() {
             {!token ? (
                 <div className="grid content-center justify-center">
                     <div className="grid content-center justify-center">
-                        <div className="text-center">
-                            <div className="text-xs italic">
-                                Save workouts & more..
-                            </div>
-                            <div className="flex justify-center gap-2">
-                                <Link
-                                    to="/login"
-                                    className="decoration-green-700 hover:underline"
-                                >
-                                    Login
-                                </Link>
-                                /
-                                <Link
-                                    to="/sign-up"
-                                    className="decoration-green-700 hover:underline"
-                                >
-                                    Sign Up
-                                </Link>
-                            </div>
+                        <div className="grid justify-center gap-1 text-xs">
+                            <Link
+                                to="/login"
+                                className="decoration-green-700 hover:underline"
+                            >
+                                Login /
+                            </Link>
+                            <Link
+                                to="/sign-up"
+                                className="decoration-green-700 hover:underline"
+                            >
+                                Sign Up
+                            </Link>
                         </div>
                     </div>
                 </div>
             ) : (
                 <div className="grid content-center justify-end">
                     <Link to={`/settings/${currentUser}`}>
-                        <div className="p-2">
+                        <div className="p-1">
                             <img
                                 src={SettingsIcon}
                                 alt="settings"
