@@ -1,57 +1,32 @@
-# React + TypeScript + Vite
+# LINK TO LIVE APP: https://messagingapp-client.vercel.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+As a swim coach, sending swimmers off at each interval is a repetitive but low-value task. Let’s break it down: with 20 swimmers and 4 lanes, each lane has 5 swimmers. Running a workout of 8x50 on a 1:00 interval means calling out 'Ready, Go!' five times per repetition, totaling 40 times for the entire workout.
 
-Currently, two official plugins are available:
+This app was created to automate that process. By taking care of these repetitive tasks, it allows me to focus on real coaching instead of acting as a glorified traffic light.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Coaches can simply input the workout details and hit start to run the session. Creating an account also enables users to save their favorite workouts for quick access through a "Save as Favorites" feature.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+For a quick demo account, please use the following:
+```
+username: pineapple
+password: 123
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Front-end: React + Typescript
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Back-end: NodeJS + Express 
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Database: PostgreSQL + Prisma 
 
+Hosted on: Vercel
 
-https://elevenlabs.io/app/speech-synthesis/text-to-speech
+# Photo/Icon Credits:
+
 <a href="https://www.vecteezy.com/free-vector/home-icon">Home Icon Vectors by Vecteezy</a>
 <a href="https://www.vecteezy.com/free-vector/settings">Settings Vectors by Vecteezy</a>
 <a href="https://www.vecteezy.com/free-vector/hamburger-menu">Hamburger Menu Vectors by Vecteezy</a>
 <a href="https://www.flaticon.com/free-icons/bookmark" title="bookmark icons">Bookmark icons created by Freepik - Flaticon</a>
+
+# Audio Credits:
+
+https://elevenlabs.io/app/speech-synthesis/text-to-speech
