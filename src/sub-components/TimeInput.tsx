@@ -23,9 +23,13 @@ const TimeInput = ({ setRepInterval }) => {
     }, []);
 
     return (
-        <div className="m-1 p-1">
-            <label htmlFor="timeInput">Interval per Repetition (MM:SS) </label>
-            <div className="w-60 outline outline-1">
+        <div className="m-1 grid p-1">
+            <div className="flex items-center">
+                <label htmlFor="timeInput">
+                    Interval per Repetition (MM:SS){' '}
+                </label>
+            </div>
+            <div className="h-8 w-60 outline outline-1">
                 <input
                     className="w-60 p-1 text-center"
                     required

@@ -76,12 +76,10 @@ function App() {
                 setAddingToFavourites,
             }}
         >
-            <div className="grid h-screen grid-rows-10">
-                <header className="row-span-1">
-                    <Header />
-                </header>
+            <div className="grid h-screen grid-rows-[62px_1fr]">
+                <Header />
 
-                <main className="row-span-9 grid">
+                <main className="grid max-h-[780px] min-h-[450px]">
                     <Routes>
                         <Route path="*" element={<Navigate to="/" />} />
                         <Route path="/sign-up" element={<Signup />} />

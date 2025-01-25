@@ -52,7 +52,7 @@ function WorkoutConfig() {
                 <form
                     action="POST"
                     onSubmit={(e) => handleStartWorkout(e)}
-                    className="grid justify-center p-1"
+                    className="grid grid-rows-5 justify-center p-1"
                 >
                     <Inputs
                         label="# of Repetition"

@@ -14,11 +14,11 @@ function Inputs({
     fixed,
 }) {
     return (
-        <div className="m-1 p-1">
-            <label htmlFor={id} className="grid">
-                {label}
-            </label>
-            <div className="relative w-60 outline outline-1">
+        <div className="m-1 grid p-1">
+            <div className="flex items-center">
+                <label htmlFor={id}>{label}</label>
+            </div>
+            <div className="relative h-8 w-60 outline outline-1">
                 {fixed ? (
                     <input
                         className="w-60 p-1 text-center"

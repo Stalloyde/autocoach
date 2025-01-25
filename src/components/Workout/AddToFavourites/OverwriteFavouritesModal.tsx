@@ -56,7 +56,7 @@ function OverwriteFavourites({
     }
 
     return (
-        <div className="m-3 grid justify-center p-2 align-middle">
+        <div className="m-1 grid max-w-64 justify-center p-1 align-middle">
             <div open={open} onClose={handleClose}>
                 <div>
                     <strong>

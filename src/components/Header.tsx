@@ -23,27 +23,23 @@ function Header() {
                     <Link to="/">AUTO-GO</Link>
                 )}
             </h1>
-            {!token ? (
-                <div className="grid content-center justify-center">
-                    <div className="grid content-center justify-center">
-                        <div className="grid justify-center gap-1 text-xs">
-                            <Link
-                                to="/login"
-                                className="decoration-green-700 hover:underline"
-                            >
-                                Login /
-                            </Link>
-                            <Link
-                                to="/sign-up"
-                                className="decoration-green-700 hover:underline"
-                            >
-                                Sign Up
-                            </Link>
-                        </div>
+            <div className="grid content-center justify-end">
+                {!token ? (
+                    <div className="grid justify-center gap-1 text-xs">
+                        <Link
+                            to="/login"
+                            className="decoration-green-700 hover:underline"
+                        >
+                            Login /
+                        </Link>
+                        <Link
+                            to="/sign-up"
+                            className="decoration-green-700 hover:underline"
+                        >
+                            Sign Up
+                        </Link>
                     </div>
-                </div>
-            ) : (
-                <div className="grid content-center justify-end">
+                ) : (
                     <Link to={`/settings/${currentUser}`}>
                         <div className="p-1">
                             <img
@@ -54,8 +50,8 @@ function Header() {
                             />
                         </div>
                     </Link>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }

@@ -43,7 +43,7 @@ function CountDown() {
 
     return (
         <>
-            <div className="grid items-center justify-center">
+            <div className="grid max-h-[780px] items-center justify-center">
                 <div className="text-center text-[40px]">
                     Workout starting in:
                 </div>
