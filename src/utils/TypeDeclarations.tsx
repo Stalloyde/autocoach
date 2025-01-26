@@ -51,3 +51,9 @@ export type LoginResponseType = {
     username: string;
     workouts: workoutType[];
 };
+
+export type SignupResponseType = {
+    usernameError?: string;
+    passwordError?: string;
+    confirmPasswordError?: string;
+};
