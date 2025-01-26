@@ -23,20 +23,14 @@ function Header() {
                     <Link to="/">AUTO-GO</Link>
                 )}
             </h1>
-            <div className="grid content-center justify-end">
+            <div className="grid content-center justify-end p-1">
                 {!token ? (
-                    <div className="grid justify-center gap-1 text-xs">
+                    <div className="grid justify-center gap-1 text-xs md:flex md:text-sm">
                         <Link
                             to="/login"
                             className="decoration-green-700 hover:underline"
                         >
-                            Login /
-                        </Link>
-                        <Link
-                            to="/sign-up"
-                            className="decoration-green-700 hover:underline"
-                        >
-                            Sign Up
+                            Login
                         </Link>
                     </div>
                 ) : (
