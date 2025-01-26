@@ -1,7 +1,8 @@
-import { useState, useContext } from 'react';
+import { FormEvent, useState, useContext, ChangeEvent } from 'react';
 import { Link, useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
 import { InputStateContext } from '../App';
+import { LoginResponseType } from '../utils/TypeDeclarations';
 
 function Login() {
     const [usernameValue, setUsernameValue] = useState('');
@@ -13,15 +14,15 @@ function Login() {
     const { setToken, setCurrentUser, setLoading } =
         useContext(InputStateContext);
 
-    function handleUsernameInput(e) {
+    function handleUsernameInput(e: ChangeEvent<HTMLInputElement>) {
         setUsernameValue(e.target.value);
     }
 
-    function handlePasswordInput(e) {
+    function handlePasswordInput(e: ChangeEvent<HTMLInputElement>) {
         setPasswordValue(e.target.value);
     }
 
-    function handleErrors(errors) {
+    function handleErrors(errors: LoginResponseType) {
         setUsernameError(errors.usernameError || '');
         setPasswordError(errors.passwordError || '');
     }
@@ -35,7 +36,7 @@ function Login() {
         setToken(Cookies.get('token'));
     };
 
-    async function handleLogin(e) {
+    async function handleLogin(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
         const response = await fetch('http://localhost:3000/login', {
@@ -48,7 +49,7 @@ function Login() {
                 password: passwordValue,
             }),
         });
-        const responseData = await response.json();
+        const responseData: LoginResponseType = await response.json();
 
         if (responseData.usernameError || responseData.passwordError) {
             handleErrors(responseData);
