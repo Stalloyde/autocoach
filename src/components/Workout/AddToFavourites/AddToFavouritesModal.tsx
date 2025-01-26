@@ -4,6 +4,7 @@ import AddToFavouritesSuccessModal from './AddToFavouritesSuccessModal';
 import WorkoutDetails from '../../../sub-components/WorkoutDetails';
 import OverwriteFavouritesModal from './OverwriteFavouritesModal';
 import SaveCancelBtn from '../../../sub-components/SaveCancelBtn';
+import APIurl from '../../../helpers/APIurl';
 
 function AddToFavouritesModal() {
     const [workoutName, setWorkoutName] = useState('');
@@ -24,7 +25,8 @@ function AddToFavouritesModal() {
     async function handleAddToFavourites(e) {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:3000/addToFavourites', {
+        const url = APIurl('addToFavourites');
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

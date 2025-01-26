@@ -1,5 +1,5 @@
 const Protected = () => {
-    return <>Settings</>;
+    return <> Coming Soon </>;
 };
 
 export default Protected;

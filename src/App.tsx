@@ -10,11 +10,16 @@ import Settings from './components/Settings';
 import CompletedWorkout from './components/Workout/CompletedWorkout';
 import { Routes, Route, Navigate } from 'react-router';
 import Cookies from 'js-cookie';
+import {
+    HeadersType,
+    ContextType,
+    currentUserType,
+} from './utils/TypeDeclarations';
 
-export const InputStateContext = createContext(null);
+export const InputStateContext = createContext<ContextType>({} as ContextType);
 
 function App() {
-    const jwtToken: string | undefined = Cookies.get('token');
+    const jwtToken = Cookies.get('token');
     const [token, setToken] = useState(jwtToken);
     const [reps, setReps] = useState(1);
     const [repInterval, setRepInterval] = useState(0);
@@ -22,17 +27,20 @@ function App() {
     const [waveInterval, setWaveInterval] = useState(10);
     const [displayInterval, setDisplayInterval] = useState('');
     const [countdown, setCountdown] = useState(5);
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setCurrentUser] = useState<currentUserType>();
     const [loading, setLoading] = useState(true);
     const [addingToFavourites, setAddingToFavourites] = useState(false);
 
     async function fetchCurrentUser() {
+        const headers: HeadersType = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) headers.Authorization = token;
+
         const response = await fetch('http://localhost:3000', {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: token,
-            },
+            headers,
         });
 
         const responseData = await response.json();

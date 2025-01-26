@@ -9,7 +9,7 @@ function Header() {
 
     return (
         <div className="grid grid-cols-[1fr_2fr_1fr] border border-slate-950 p-1">
-            {token && currentUser.workouts.length > 0 ? (
+            {token && currentUser && currentUser.workouts.length > 0 ? (
                 <div className="content-center p-1">
                     <FavouritesMenu />
                 </div>
@@ -17,7 +17,7 @@ function Header() {
                 <div></div>
             )}
             <h1 className="grid content-center justify-center p-1 text-2xl font-extrabold">
-                {token ? (
+                {token && currentUser ? (
                     <Link to={`/${currentUser.username}`}>AUTO-GO</Link>
                 ) : (
                     <Link to="/">AUTO-GO</Link>
