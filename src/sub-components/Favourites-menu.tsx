@@ -80,9 +80,12 @@ export default function FavouritesMenu() {
                 }}
                 sx={{
                     fontFamily: 'inherit',
-                    margin: '10px -20px',
+                    margin: '5px -20px',
                     '.MuiPaper-root': {
-                        width: '100px',
+                        width: {
+                            xs: '100px',
+                            sm: '200px',
+                        },
                         backgroundColor: '#1E3A8A',
                         color: 'white',
                         borderRadius: '0',
