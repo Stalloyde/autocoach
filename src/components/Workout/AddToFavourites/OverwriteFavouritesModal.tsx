@@ -4,6 +4,7 @@ import { Dialog } from '@mui/material';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import SaveCancelBtn from '../../../sub-components/SaveCancelBtn';
+import APIurl from '../../../helpers/APIurl';
 
 function OverwriteFavourites({
     oldWorkoutName,
@@ -31,24 +32,23 @@ function OverwriteFavourites({
 
     async function handleOverWriteFavourites(e) {
         e.preventDefault();
-        const response = await fetch(
-            'http://localhost:3000/overwriteFavourites',
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: token,
-                },
-                body: JSON.stringify({
-                    workoutName,
-                    reps,
-                    repInterval,
-                    waveInterval,
-                    waves,
-                    countdown,
-                }),
-            }
-        );
+
+        const url = APIurl('overwriteFavourites');
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            },
+            body: JSON.stringify({
+                workoutName,
+                reps,
+                repInterval,
+                waveInterval,
+                waves,
+                countdown,
+            }),
+        });
         const responseData = await response.json();
         setOpen(false);
         setAddToFavouritesSuccess(true);

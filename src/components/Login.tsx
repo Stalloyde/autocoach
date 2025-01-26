@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
 import { InputStateContext } from '../App';
 import { LoginResponseType } from '../utils/TypeDeclarations';
+import APIurl from '../helpers/APIurl';
 
 function Login() {
     const [usernameValue, setUsernameValue] = useState('');
@@ -39,7 +40,8 @@ function Login() {
     async function handleLogin(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:3000/login', {
+        const url = APIurl('login');
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

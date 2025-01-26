@@ -1,6 +1,8 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { FormEvent, useState, ChangeEvent } from 'react';
+import { Link } from 'react-router';
 import SignUpSuccessModal from './SignupSuccessModal';
+import { SignupResponseType } from '../../utils/TypeDeclarations';
+import APIurl from '../../helpers/APIurl';
 
 function Signup() {
     const [usernameValue, setUsernameValue] = useState('');
@@ -11,28 +13,29 @@ function Signup() {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [signUpSuccess, setSignUpSuccess] = useState(false);
 
-    function handleUsernameInput(e) {
+    function handleUsernameInput(e: ChangeEvent<HTMLInputElement>) {
         setUsernameValue(e.target.value);
     }
 
-    function handlePasswordInput(e) {
+    function handlePasswordInput(e: ChangeEvent<HTMLInputElement>) {
         setPasswordValue(e.target.value);
     }
 
-    function handleConfirmPasswordInput(e) {
+    function handleConfirmPasswordInput(e: ChangeEvent<HTMLInputElement>) {
         setConfirmPasswordValue(e.target.value);
     }
 
-    function handleErrors(errors) {
+    function handleErrors(errors: SignupResponseType) {
         setUsernameError(errors.usernameError || '');
         setPasswordError(errors.passwordError || '');
         setConfirmPasswordError(errors.confirmPasswordError || '');
     }
 
-    async function handleSignup(e) {
+    async function handleSignup(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:3000/signup', {
+        const url = APIurl('signup');
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +46,7 @@ function Signup() {
                 confirmPassword: confirmPasswordValue,
             }),
         });
-        const responseData = await response.json();
+        const responseData: SignupResponseType = await response.json();
         if (
             responseData.usernameError ||
             responseData.passwordError ||
