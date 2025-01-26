@@ -1,4 +1,4 @@
-# LINK TO LIVE APP: https://messagingapp-client.vercel.app/
+# LINK TO LIVE APP: https://autocoach.vercel.app/
 
 As a swim coach, sending swimmers off at each interval is a repetitive but low-value task. Let’s break it down: with 20 swimmers and 4 lanes, each lane has 5 swimmers. Running a workout of 8x50 on a 1:00 interval means calling out 'Ready, Go!' five times per repetition, totaling 40 times for the entire workout.
 
