@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FavouritesIcon from '../assets/favourites-icon.png';
 import { formatTime } from '../helpers/formatTime';
 import { useNavigate } from 'react-router';
+import { workoutType } from '../utils/TypeDeclarations';
 
 export default function FavouritesMenu() {
     const navigate = useNavigate();
@@ -22,7 +23,8 @@ export default function FavouritesMenu() {
         addingToFavourites,
         setAddingToFavourites,
     } = useContext(InputStateContext);
-    const { workouts } = currentUser;
+
+    const workouts = currentUser?.workouts || [];
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -32,7 +34,7 @@ export default function FavouritesMenu() {
         setAnchorEl(null);
     };
 
-    const handleQuickStart = (workout) => {
+    const handleQuickStart = (workout: workoutType) => {
         setReps(Number(workout.reps));
         setRepInterval(Number(workout.repInterval));
         setDisplayInterval(formatTime(workout.repInterval));
@@ -41,7 +43,7 @@ export default function FavouritesMenu() {
         setCountdown(Number(workout.countdown));
         if (addingToFavourites) setAddingToFavourites(false);
         setAnchorEl(null);
-        navigate(`/${currentUser.username}`);
+        navigate(`/${currentUser?.username}`);
     };
 
     return (
@@ -94,7 +96,7 @@ export default function FavouritesMenu() {
                     },
                 }}
             >
-                {workouts &&
+                {workouts.length > 0 &&
                     workouts.map((workout) => (
                         <MenuItem
                             onClick={() => handleQuickStart(workout)}

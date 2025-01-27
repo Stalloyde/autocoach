@@ -1,19 +1,17 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { InputStateContext } from '../../../App';
-import { Dialog } from '@mui/material';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import SaveCancelBtn from '../../../sub-components/SaveCancelBtn';
 import APIurl from '../../../helpers/APIurl';
+import {
+    HeadersType,
+    OverwriteFavouritesPropsType,
+} from '../../../utils/TypeDeclarations';
 
 function OverwriteFavourites({
     oldWorkoutName,
-    setOldWorkoutName,
     setAddToFavouritesSuccess,
     workoutName,
-}) {
-    const [open, setOpen] = useState(true);
-
+}: OverwriteFavouritesPropsType) {
     const {
         reps,
         repInterval,
@@ -25,21 +23,20 @@ function OverwriteFavourites({
         setAddingToFavourites,
     } = useContext(InputStateContext);
 
-    const handleClose = () => {
-        setOpen(false);
-        setOldWorkoutName('');
-    };
-
-    async function handleOverWriteFavourites(e) {
+    async function handleOverWriteFavourites(
+        e: React.MouseEvent<HTMLButtonElement>
+    ) {
         e.preventDefault();
+        const headers: HeadersType = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) headers.Authorization = token;
 
         const url = APIurl('overwriteFavourites');
         const response = await fetch(url, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: token,
-            },
+            headers,
             body: JSON.stringify({
                 workoutName,
                 reps,
@@ -50,14 +47,13 @@ function OverwriteFavourites({
             }),
         });
         const responseData = await response.json();
-        setOpen(false);
         setAddToFavouritesSuccess(true);
         setCurrentUser(responseData);
     }
 
     return (
         <div className="m-1 grid max-w-64 justify-center p-1 align-middle">
-            <div open={open} onClose={handleClose}>
+            <div>
                 <div>
                     <strong>
                         The workout '{oldWorkoutName}' already exists. Are you

@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 export type HeadersType = {
     'Content-Type': string;
     Authorization?: string;
@@ -56,4 +58,43 @@ export type SignupResponseType = {
     usernameError?: string;
     passwordError?: string;
     confirmPasswordError?: string;
+};
+
+export type AddToFavouritesResponseType = {
+    workoutNameError?: string;
+    username: string;
+    workouts: workoutType[];
+};
+
+export type OverwriteFavouritesPropsType = {
+    oldWorkoutName: string;
+    setAddToFavouritesSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+    workoutName: string;
+};
+
+export type SaveCancelBtnPropsType = {
+    type: string;
+    setAddingToFavourites: null | React.Dispatch<React.SetStateAction<boolean>>;
+    handleOverWriteFavourites:
+        | null
+        | ((e: React.MouseEvent<HTMLButtonElement>) => Promise<void>);
+};
+
+export type InputsTypes = {
+    label: string;
+    inputType: string;
+    id: string;
+    minValue?: string;
+    maxValue?: number;
+    value?: number;
+    defaultValue?: number;
+    handleDecrementBtn?: () => void | null;
+    handleIncrementBtn?: () => void;
+    handleInput?: (e: ChangeEvent<HTMLInputElement>) => void;
+    disableTyping?: (e: React.KeyboardEvent) => void;
+    fixed?: boolean;
+};
+
+export type TimeInputPropsType = {
+    setRepInterval: React.Dispatch<React.SetStateAction<number>>;
 };

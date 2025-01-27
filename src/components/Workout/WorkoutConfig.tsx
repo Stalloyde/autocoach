@@ -24,15 +24,15 @@ function WorkoutConfig() {
 
     let navigate = useNavigate();
 
-    function handleAddingToFavourites(e) {
+    function handleAddingToFavourites(e: any) {
         e.preventDefault();
         if (repInterval > 0) setAddingToFavourites(true);
     }
 
-    function handleStartWorkout(e) {
+    function handleStartWorkout(e: any) {
         e.preventDefault();
         if (e.nativeEvent.submitter.name === 'start-workout')
-            token
+            token && currentUser
                 ? navigate(`/countdown/${currentUser.username}`)
                 : navigate('/countdown');
 
@@ -41,7 +41,9 @@ function WorkoutConfig() {
     }
 
     useEffect(() => {
-        token ? navigate(`/${currentUser.username}`) : navigate(`/`);
+        token && currentUser
+            ? navigate(`/${currentUser.username}`)
+            : navigate(`/`);
     }, []);
 
     return (
@@ -64,7 +66,9 @@ function WorkoutConfig() {
                             reps > 1 ? setReps(reps - 1) : null
                         }
                         handleIncrementBtn={() => setReps((prev) => prev + 1)}
-                        handleInput={(e) => setReps(Number(e.target.value))}
+                        handleInput={(e) =>
+                            setReps(Number(e.currentTarget.value))
+                        }
                     />
                     <TimeInput setRepInterval={setRepInterval} />
                     <Inputs
@@ -78,7 +82,9 @@ function WorkoutConfig() {
                             waves > 2 ? setWaves(waves - 1) : null
                         }
                         handleIncrementBtn={() => setWaves((prev) => prev + 1)}
-                        handleInput={(e) => setWaves(Number(e.target.value))}
+                        handleInput={(e) =>
+                            setWaves(Number(e.currentTarget.value))
+                        }
                     />
                     <Inputs
                         label="Interval between Waves (seconds)"
@@ -105,7 +111,7 @@ function WorkoutConfig() {
                             setCountdown((prev) => prev + 1)
                         }
                         handleInput={(e) =>
-                            setCountdown(Number(e.target.value))
+                            setCountdown(Number(e.currentTarget.value))
                         }
                     />
                     <button

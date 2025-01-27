@@ -24,7 +24,7 @@ function CountDown() {
 
         if (countdown === 0) {
             playGo();
-            token
+            token && currentUser
                 ? navigate(`/run-workout/${currentUser.username}`)
                 : navigate('/run-workout');
         }
