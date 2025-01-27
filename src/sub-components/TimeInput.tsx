@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { InputStateContext } from '../App';
 import { formatTime } from '../helpers/formatTime';
+import { TimeInputPropsType } from '../utils/TypeDeclarations';
 
-const TimeInput = ({ setRepInterval }) => {
+const TimeInput = ({ setRepInterval }: TimeInputPropsType) => {
     const { displayInterval, setDisplayInterval, repInterval } =
         useContext(InputStateContext);
 

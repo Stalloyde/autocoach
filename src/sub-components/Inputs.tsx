@@ -1,3 +1,5 @@
+import { InputsTypes } from '../utils/TypeDeclarations';
+
 function Inputs({
     label,
     inputType,
@@ -6,13 +8,12 @@ function Inputs({
     maxValue,
     value,
     defaultValue,
-    pattern,
     handleDecrementBtn,
     handleIncrementBtn,
     handleInput,
     disableTyping,
     fixed,
-}) {
+}: InputsTypes) {
     return (
         <div className="m-1 grid p-1">
             <div className="flex items-center">
@@ -24,10 +25,9 @@ function Inputs({
                         className="w-60 p-1 text-center"
                         required
                         onKeyDown={disableTyping}
-                        onWheel={(e) => e.target.blur()}
+                        onWheel={(e) => e.currentTarget.blur()}
                         type={inputType}
                         id={id}
-                        pattern={pattern}
                         min={minValue}
                         max={maxValue}
                         value={value}
@@ -47,10 +47,9 @@ function Inputs({
                             className="w-40 p-1 text-center"
                             required
                             onKeyDown={disableTyping}
-                            onWheel={(e) => e.target.blur()}
+                            onWheel={(e) => e.currentTarget.blur()}
                             type={inputType}
                             id={id}
-                            pattern={pattern}
                             min={minValue}
                             max={maxValue}
                             value={value}

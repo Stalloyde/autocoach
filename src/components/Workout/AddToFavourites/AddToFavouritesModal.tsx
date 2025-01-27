@@ -1,10 +1,14 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, FormEvent } from 'react';
 import { InputStateContext } from '../../../App';
 import AddToFavouritesSuccessModal from './AddToFavouritesSuccessModal';
 import WorkoutDetails from '../../../sub-components/WorkoutDetails';
 import OverwriteFavouritesModal from './OverwriteFavouritesModal';
 import SaveCancelBtn from '../../../sub-components/SaveCancelBtn';
 import APIurl from '../../../helpers/APIurl';
+import {
+    HeadersType,
+    AddToFavouritesResponseType,
+} from '../../../utils/TypeDeclarations';
 
 function AddToFavouritesModal() {
     const [workoutName, setWorkoutName] = useState('');
@@ -22,16 +26,17 @@ function AddToFavouritesModal() {
         setAddingToFavourites,
     } = useContext(InputStateContext);
 
-    async function handleAddToFavourites(e) {
+    async function handleAddToFavourites(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        const headers: HeadersType = {
+            'Content-Type': 'application/json',
+        };
 
+        if (token) headers.Authorization = token;
         const url = APIurl('addToFavourites');
         const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: token,
-            },
+            headers,
             body: JSON.stringify({
                 workoutName,
                 reps,
@@ -41,7 +46,7 @@ function AddToFavouritesModal() {
                 countdown,
             }),
         });
-        const responseData = await response.json();
+        const responseData: AddToFavouritesResponseType = await response.json();
         if (responseData.workoutNameError) {
             setOldWorkoutName(responseData.workoutNameError);
         } else {
@@ -57,7 +62,6 @@ function AddToFavouritesModal() {
             ) : oldWorkoutName ? (
                 <OverwriteFavouritesModal
                     oldWorkoutName={oldWorkoutName}
-                    setOldWorkoutName={setOldWorkoutName}
                     setAddToFavouritesSuccess={setAddToFavouritesSuccess}
                     workoutName={workoutName}
                 />
