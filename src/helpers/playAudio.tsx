@@ -4,8 +4,11 @@ let tymAudio = new Audio('/take-your-marks-audio.mp3');
 let fiveSecondsAudio = new Audio('/five-seconds-audio.mp3');
 let workoutCompletedAudio = new Audio('/workout-completed-audio.mp3');
 
-[goAudio, tymAudio, fiveSecondsAudio, workoutCompletedAudio].forEach((audio) =>
-    audio.load()
+[goAudio, tymAudio, fiveSecondsAudio, workoutCompletedAudio].forEach(
+    (audio) => {
+        audio.preload = 'auto';
+        audio.load();
+    }
 );
 
 function playGo() {
