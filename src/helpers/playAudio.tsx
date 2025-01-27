@@ -1,13 +1,12 @@
 let goAudio = new Audio('/go-audio.mp3');
-
 let tymAudio = new Audio('/take-your-marks-audio.mp3');
 let fiveSecondsAudio = new Audio('/five-seconds-audio.mp3');
 let workoutCompletedAudio = new Audio('/workout-completed-audio.mp3');
 
-[goAudio, tymAudio, fiveSecondsAudio, workoutCompletedAudio].forEach(
+[goAudio, fiveSecondsAudio, tymAudio, workoutCompletedAudio].forEach(
     (audio) => {
-        audio.preload = 'auto';
-        audio.load();
+        audio.play();
+        audio.pause();
     }
 );
 
