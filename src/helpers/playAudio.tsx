@@ -7,10 +7,6 @@ function playGo() {
     goAudio.play();
 }
 
-function pauseGo() {
-    goAudio.pause();
-}
-
 function playTYM() {
     tymAudio.play();
 }
@@ -23,4 +19,4 @@ function playWorkoutCompleted() {
     workoutCompletedAudio.play();
 }
 
-export { playGo, pauseGo, playTYM, playFiveSeconds, playWorkoutCompleted };
+export { playGo, playTYM, playFiveSeconds, playWorkoutCompleted };

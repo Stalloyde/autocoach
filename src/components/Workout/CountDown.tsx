@@ -1,12 +1,7 @@
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { InputStateContext } from '../../App';
-import {
-    playGo,
-    pauseGo,
-    playTYM,
-    playFiveSeconds,
-} from '../../helpers/playAudio';
+import { playGo, playTYM, playFiveSeconds } from '../../helpers/playAudio';
 import { useNavigate } from 'react-router';
 import { formatTime } from '../../helpers/formatTime';
 import WorkoutDetails from '../../sub-components/WorkoutDetails';
@@ -26,10 +21,6 @@ function CountDown() {
     useEffect(() => {
         if (countdown === 5) playFiveSeconds();
         if (countdown === 2) playTYM();
-        if (countdown === 1) {
-            playGo();
-            pauseGo();
-        }
 
         if (countdown === 0) {
             playGo();
