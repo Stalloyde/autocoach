@@ -1,22 +1,42 @@
-let goAudio = new Audio('/go-audio.mp3');
-let tymAudio = new Audio('/take-your-marks-audio.mp3');
-let fiveSecondsAudio = new Audio('/five-seconds-audio.mp3');
-let workoutCompletedAudio = new Audio('/workout-completed-audio.mp3');
+import { Howl } from 'howler';
+
+const sounds = {
+    goAudio: new Howl({
+        src: ['/go-audio.mp3'],
+        html5: true,
+        preload: true,
+    }),
+    tymAudio: new Howl({
+        src: ['/take-your-marks-audio.mp3'],
+        html5: true,
+        preload: true,
+    }),
+    fiveSecondsAudio: new Howl({
+        src: ['/five-seconds-audio.mp3'],
+        html5: true,
+        preload: true,
+    }),
+    workoutCompletedAudio: new Howl({
+        src: ['/workout-completed-audio.mp3'],
+        html5: true,
+        preload: true,
+    }),
+};
 
 function playGo() {
-    goAudio.play();
+    sounds.goAudio.play();
 }
 
 function playTYM() {
-    tymAudio.play();
+    sounds.tymAudio.play();
 }
 
 function playFiveSeconds() {
-    fiveSecondsAudio.play();
+    sounds.fiveSecondsAudio.play();
 }
 
 function playWorkoutCompleted() {
-    workoutCompletedAudio.play();
+    sounds.workoutCompletedAudio.play();
 }
 
 export { playGo, playTYM, playFiveSeconds, playWorkoutCompleted };
