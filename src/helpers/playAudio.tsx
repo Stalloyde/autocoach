@@ -3,15 +3,12 @@ let tymAudio = new Audio('/take-your-marks-audio.mp3');
 let fiveSecondsAudio = new Audio('/five-seconds-audio.mp3');
 let workoutCompletedAudio = new Audio('/workout-completed-audio.mp3');
 
-[goAudio, fiveSecondsAudio, tymAudio, workoutCompletedAudio].forEach(
-    (audio) => {
-        audio.play();
-        audio.pause();
-    }
-);
-
 function playGo() {
     goAudio.play();
+}
+
+function pauseGo() {
+    goAudio.pause();
 }
 
 function playTYM() {
@@ -26,4 +23,4 @@ function playWorkoutCompleted() {
     workoutCompletedAudio.play();
 }
 
-export { playGo, playTYM, playFiveSeconds, playWorkoutCompleted };
+export { playGo, pauseGo, playTYM, playFiveSeconds, playWorkoutCompleted };
