@@ -8,6 +8,10 @@ const TimeInput = ({ setRepInterval }: TimeInputPropsType) => {
         useContext(InputStateContext);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.target.focus();
+        const val = e.target.value;
+        e.target.value = '';
+        e.target.value = val;
         let input = e.target.value.replace(/\D/g, '');
         if (input.length > 4) input = input.slice(-4);
         const minutes = input.slice(0, -2) || '0';
