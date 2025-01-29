@@ -80,6 +80,7 @@ function AddToFavouritesModal() {
                             value={workoutName}
                             placeholder="Workout Name"
                             onChange={(e) => setWorkoutName(e.target.value)}
+                            maxLength={25}
                             required
                         />
                     </div>
