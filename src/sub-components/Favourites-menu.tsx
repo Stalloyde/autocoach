@@ -85,8 +85,8 @@ export default function FavouritesMenu() {
                     margin: '5px -15px',
                     '.MuiPaper-root': {
                         width: {
-                            xs: '200px',
-                            sm: '250px',
+                            xs: '220px',
+                            sm: '300px',
                         },
                         overflow: 'auto',
                         backgroundColor: '#1E3A8A',
