@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { InputStateContext } from '../App';
 import { formatTime } from '../helpers/formatTime';
 import { TimeInputPropsType } from '../utils/TypeDeclarations';
@@ -6,20 +6,23 @@ import { TimeInputPropsType } from '../utils/TypeDeclarations';
 const TimeInput = ({ setRepInterval }: TimeInputPropsType) => {
     const { displayInterval, setDisplayInterval, repInterval } =
         useContext(InputStateContext);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.target.focus();
-        const val = e.target.value;
-        e.target.value = '';
-        e.target.value = val;
         let input = e.target.value.replace(/\D/g, '');
         if (input.length > 4) input = input.slice(-4);
         const minutes = input.slice(0, -2) || '0';
         const seconds = input.slice(-2) || '0';
         const rawTime = Number(minutes) * 60 + Number(seconds);
         const formattedTime = `${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+
         setDisplayInterval(formattedTime);
         setRepInterval(rawTime);
+
+        // Move caret to the end
+        if (inputRef.current) {
+            inputRef.current.selectionStart = 4;
+        }
     };
 
     useEffect(() => {
@@ -36,6 +39,7 @@ const TimeInput = ({ setRepInterval }: TimeInputPropsType) => {
             </div>
             <div className="h-8 w-60 outline outline-1">
                 <input
+                    ref={inputRef}
                     className="w-60 p-1 text-center"
                     required
                     id="timeInput"
