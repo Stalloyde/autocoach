@@ -8,13 +8,6 @@ const TimeInput = ({ setRepInterval }: TimeInputPropsType) => {
         useContext(InputStateContext);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const handleKeyUp = (e: React.KeyboardEvent) => {
-        if (inputRef.current && e.key === 'Backspace') {
-            inputRef.current.selectionStart = 4;
-            inputRef.current.selectionEnd = 5;
-        }
-    };
-
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let input = e.target.value.replace(/\D/g, '');
         if (input.length > 4) input = input.slice(-4);
@@ -25,6 +18,13 @@ const TimeInput = ({ setRepInterval }: TimeInputPropsType) => {
 
         setDisplayInterval(formattedTime);
         setRepInterval(rawTime);
+
+        requestAnimationFrame(() => {
+            if (inputRef.current) {
+                const length = inputRef.current.value.length;
+                inputRef.current.setSelectionRange(length, length);
+            }
+        });
     };
 
     useEffect(() => {
@@ -49,7 +49,6 @@ const TimeInput = ({ setRepInterval }: TimeInputPropsType) => {
                     value={displayInterval}
                     onChange={handleInputChange}
                     placeholder="MM:SS"
-                    onKeyDown={handleKeyUp}
                 />
             </div>
         </div>
