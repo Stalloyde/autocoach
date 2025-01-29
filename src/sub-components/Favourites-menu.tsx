@@ -82,12 +82,13 @@ export default function FavouritesMenu() {
                 }}
                 sx={{
                     fontFamily: 'inherit',
-                    margin: '5px -20px',
+                    margin: '5px -15px',
                     '.MuiPaper-root': {
                         width: {
-                            xs: '100px',
-                            sm: '200px',
+                            xs: '200px',
+                            sm: '250px',
                         },
+                        overflow: 'auto',
                         backgroundColor: '#1E3A8A',
                         color: 'white',
                         borderRadius: '0',
@@ -101,6 +102,12 @@ export default function FavouritesMenu() {
                         <MenuItem
                             onClick={() => handleQuickStart(workout)}
                             key={workout.id}
+                            sx={{
+                                fontSize: {
+                                    xs: 15,
+                                    sm: 18,
+                                },
+                            }}
                         >
                             {workout.workoutName}
                         </MenuItem>
