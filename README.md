@@ -6,12 +6,6 @@ This app was created to automate that process. By taking care of these repetitiv
 
 Coaches can simply input the workout details and hit start to run the session. Creating an account also enables users to save their favorite workouts for quick access through a "Save as Favorites" feature.
 
-For a quick demo account, please use the following:
-```
-username: pineapple
-password: 123
-```
-
 Front-end: React + Typescript
 
 Back-end: NodeJS + Express 
@@ -19,6 +13,8 @@ Back-end: NodeJS + Express
 Database: PostgreSQL + Prisma 
 
 Hosted on: Vercel
+
+# Please note that logging in and "Save as Favourites" feature has been retracted from public access as I've expired all free db hosting options.
 
 # Photo/Icon Credits:
 
