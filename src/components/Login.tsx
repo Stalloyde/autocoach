@@ -37,31 +37,31 @@ function Login() {
         setToken(Cookies.get('token'));
     };
 
-    async function handleLogin(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    // async function handleLogin(e: FormEvent<HTMLFormElement>) {
+    //     e.preventDefault();
 
-        const url = APIurl('login');
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: usernameValue,
-                password: passwordValue,
-            }),
-        });
-        const responseData: LoginResponseType = await response.json();
+    //     const url = APIurl('login');
+    //     const response = await fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             username: usernameValue,
+    //             password: passwordValue,
+    //         }),
+    //     });
+    //     const responseData: LoginResponseType = await response.json();
 
-        if (responseData.usernameError || responseData.passwordError) {
-            handleErrors(responseData);
-        } else {
-            handleToken(responseData.Bearer);
-            setCurrentUser(responseData);
-            setLoading(false);
-            navigate(`/${responseData.username}`);
-        }
-    }
+    //     if (responseData.usernameError || responseData.passwordError) {
+    //         handleErrors(responseData);
+    //     } else {
+    //         handleToken(responseData.Bearer);
+    //         setCurrentUser(responseData);
+    //         setLoading(false);
+    //         navigate(`/${responseData.username}`);
+    //     }
+    // }
 
     return (
         <div className="grid content-center justify-center">

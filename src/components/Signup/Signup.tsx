@@ -31,32 +31,32 @@ function Signup() {
         setConfirmPasswordError(errors.confirmPasswordError || '');
     }
 
-    async function handleSignup(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    // async function handleSignup(e: FormEvent<HTMLFormElement>) {
+    //     e.preventDefault();
 
-        const url = APIurl('signup');
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: usernameValue,
-                password: passwordValue,
-                confirmPassword: confirmPasswordValue,
-            }),
-        });
-        const responseData: SignupResponseType = await response.json();
-        if (
-            responseData.usernameError ||
-            responseData.passwordError ||
-            responseData.confirmPasswordError
-        ) {
-            handleErrors(responseData);
-        } else {
-            setSignUpSuccess(true);
-        }
-    }
+    //     const url = APIurl('signup');
+    //     const response = await fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             username: usernameValue,
+    //             password: passwordValue,
+    //             confirmPassword: confirmPasswordValue,
+    //         }),
+    //     });
+    //     const responseData: SignupResponseType = await response.json();
+    //     if (
+    //         responseData.usernameError ||
+    //         responseData.passwordError ||
+    //         responseData.confirmPasswordError
+    //     ) {
+    //         handleErrors(responseData);
+    //     } else {
+    //         setSignUpSuccess(true);
+    //     }
+    // }
 
     return (
         <div className="grid content-center justify-center">

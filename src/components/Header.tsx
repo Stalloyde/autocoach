@@ -27,7 +27,7 @@ function Header() {
                 {!token ? (
                     <div className="grid justify-center gap-1 text-xs md:flex md:text-sm">
                         <Link
-                            to="/login"
+                            to="..."
                             className="decoration-green-700 hover:underline"
                         >
                             Login
