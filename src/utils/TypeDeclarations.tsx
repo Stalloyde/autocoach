@@ -62,6 +62,7 @@ export type SignupResponseType = {
 
 export type AddToFavouritesResponseType = {
     workoutNameError?: string;
+    duplicateFound?: string;
     username: string;
     workouts: workoutType[];
 };

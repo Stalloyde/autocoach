@@ -14,6 +14,7 @@ function AddToFavouritesModal() {
     const [workoutName, setWorkoutName] = useState('');
     const [oldWorkoutName, setOldWorkoutName] = useState('');
     const [addToFavouritesSuccess, setAddToFavouritesSuccess] = useState(false);
+    const [error, setError] = useState('');
 
     const {
         reps,
@@ -46,9 +47,12 @@ function AddToFavouritesModal() {
                 countdown,
             }),
         });
+
         const responseData: AddToFavouritesResponseType = await response.json();
-        if (responseData.workoutNameError) {
-            setOldWorkoutName(responseData.workoutNameError);
+        if (responseData.duplicateFound) {
+            setOldWorkoutName(responseData.duplicateFound);
+        } else if (responseData.workoutNameError) {
+            setError(responseData.workoutNameError);
         } else {
             setAddToFavouritesSuccess(true);
             setCurrentUser(responseData);
@@ -83,6 +87,7 @@ function AddToFavouritesModal() {
                             maxLength={25}
                             required
                         />
+                        <p className="text-xs italic text-red-600">{error}</p>
                     </div>
                     <SaveCancelBtn
                         type={'save'}
