@@ -14,7 +14,7 @@ Database: PostgreSQL + Prisma
 
 Hosted on: Vercel
 
-# Please note that logging in and "Save as Favourites" feature has been retracted from public access as I've expired all free db hosting options.
+# Please note that logging in and "Save as Favourites" feature has been retracted from public access as I've exhausted all free database hosting options.
 
 # Photo/Icon Credits:
 
