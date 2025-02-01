@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { React, useState, useEffect, useRef, useMemo } from 'react';
 import { useContext } from 'react';
 import { InputStateContext } from '../../App';
 import {
@@ -8,7 +8,7 @@ import {
     playWorkoutCompleted,
 } from '../../helpers/playAudio';
 import { useNavigate } from 'react-router';
-import { formatTime } from '../../helpers/formatTime';
+import { formatMilliSeconds } from '../../helpers/formatTime';
 import WorkoutDetails from '../../sub-components/WorkoutDetails';
 
 function RunWorkout() {
@@ -16,80 +16,93 @@ function RunWorkout() {
         useContext(InputStateContext);
     const navigate = useNavigate();
 
-    const [currentCountdown, setCurrentCountdown] = useState(waveInterval);
     const [currentWave, setCurrentWave] = useState(1);
     const [currentRep, setCurrentRep] = useState(1);
     const [currentRepInterval, setCurrentRepInterval] = useState(0);
     const [formattedCurrentRepInterval, setFormattedCurrentRepInterval] =
         useState('');
 
+    const startTime = useRef(Date.now());
+    const [wavesArray, setWavesArray] = useState<number[]>([]);
+    const lastTriggeredWave = useRef(0);
+
+    useEffect(() => {
+        const array: Array<number> = [];
+        for (let i = 1; i < waves; i++) {
+            array.push(waveInterval * i);
+        }
+        setWavesArray(array);
+    }, []);
+
     //rep management
     useEffect(() => {
-        setFormattedCurrentRepInterval(formatTime(currentRepInterval));
         if (repInterval < 1) navigate('/');
+        setFormattedCurrentRepInterval(formatMilliSeconds(currentRepInterval));
+        const currentRepIntervalS = Math.floor(currentRepInterval / 1000);
 
-        const interval = setInterval(() => {
-            if (currentRepInterval !== repInterval)
-                setCurrentRepInterval((prev) => prev + 1);
-        }, 1000);
+        const toPrepNextRep = currentRep < reps;
+        const noNextRep = currentRep === reps;
+        const workoutCompleted = currentRep > reps;
 
-        //check workout complete
-        if (
-            currentRep === reps &&
-            currentWave === waves &&
-            currentRepInterval === repInterval
-        ) {
+        if (toPrepNextRep) {
+            if (currentRepIntervalS + 6 === repInterval) playFiveSeconds();
+            if (currentRepIntervalS + 3 === repInterval) playTYM();
+            if (currentRepIntervalS === repInterval) {
+                playGo();
+                setCurrentWave(1);
+                setCurrentRep((prev) => prev + 1);
+                setCurrentRepInterval(1);
+                startTime.current = Date.now();
+            }
+        }
+
+        if (noNextRep) {
+            if (currentRepIntervalS === repInterval) {
+                setCurrentRep((prev) => prev + 1);
+            }
+        }
+
+        if (workoutCompleted) {
             playWorkoutCompleted();
             setCountdown(5);
             navigate('/completed-workout');
         }
 
-        //if reps not completed, begin countdown and prep for next rep
-        if (currentRep !== reps && currentRepInterval + 10 === repInterval) {
-            setCurrentRep((prev) => prev + 1);
-            setCurrentWave(0);
+        const finalWave = currentWave === waves;
+
+        if (!finalWave) {
+            lastTriggeredWave;
+            if (wavesArray.includes(currentRepIntervalS + 6)) playFiveSeconds();
+            if (wavesArray.includes(currentRepIntervalS + 3)) playTYM();
+            if (
+                wavesArray.includes(currentRepIntervalS) &&
+                lastTriggeredWave.current !== currentRepIntervalS
+            ) {
+                playGo();
+                setCurrentWave((prev) => prev + 1);
+                lastTriggeredWave.current = currentRepIntervalS; // Prevent multiple increments
+            }
         }
-
-        //reset the current rep interval
-        if (currentRepInterval === repInterval) setCurrentRepInterval(0);
-
-        return () => clearInterval(interval);
-    }, [currentRepInterval]);
-
-    //wave management
-    useEffect(() => {
-        if (currentCountdown === 5) playFiveSeconds();
-        if (currentCountdown === 2) playTYM();
-
-        if (currentCountdown === 0) {
-            playGo();
-            setCurrentWave(currentWave + 1);
-            setCurrentCountdown(waveInterval);
-        }
-
-        //check waves complete
-        if (currentWave === waves) return;
 
         const interval = setInterval(() => {
-            if (currentCountdown > 0) setCurrentCountdown((prev) => prev - 1);
-        }, 1000);
+            setCurrentRepInterval(Date.now() - startTime.current);
+        }, 10);
 
         return () => clearInterval(interval);
-    }, [currentCountdown, currentRep]);
+    }, [currentRepInterval, repInterval]);
 
     return (
         <>
             <div className="grid grid-rows-[0.5fr_1fr_1fr] items-center justify-center">
-                <div>
-                    <div className="text-center text-[40px]">
-                        Current Time: {formattedCurrentRepInterval}
+                <div></div>
+                <div className="grid justify-center text-[150px]">
+                    <div className="text-center text-[100px]">
+                        {formattedCurrentRepInterval}
                     </div>
                     <div className="text-center text-[20px]">
                         Rep {currentRep}/{reps} - Wave {currentWave}/{waves}
                     </div>
-                </div>
-                <div className="grid justify-center text-[150px]">
-                    <div>{currentCountdown}</div>
+                    {/* <div>{currentCountdown}</div> */}
                 </div>
                 <WorkoutDetails />
             </div>
