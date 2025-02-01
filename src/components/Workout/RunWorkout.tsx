@@ -47,7 +47,7 @@ function RunWorkout() {
         if (toPrepNextRep) {
             if (currentRepIntervalS + 6 === repInterval) playFiveSeconds();
             if (currentRepIntervalS + 3 === repInterval) playTYM();
-            if (currentRepIntervalS === repInterval) {
+            if (currentRepIntervalS + 1 === repInterval) {
                 playGo();
                 setCurrentWave(1);
                 setCurrentRep((prev) => prev + 1);
@@ -75,12 +75,12 @@ function RunWorkout() {
             if (wavesArray.includes(currentRepIntervalS + 6)) playFiveSeconds();
             if (wavesArray.includes(currentRepIntervalS + 3)) playTYM();
             if (
-                wavesArray.includes(currentRepIntervalS) &&
-                lastTriggeredWave.current !== currentRepIntervalS
+                wavesArray.includes(currentRepIntervalS + 1) &&
+                lastTriggeredWave.current !== currentRepIntervalS //prevent multiple increments by making sure that the last triggered interval doesnt match the current time
             ) {
                 playGo();
                 setCurrentWave((prev) => prev + 1);
-                lastTriggeredWave.current = currentRepIntervalS; // Prevent multiple increments
+                lastTriggeredWave.current = currentRepIntervalS; // save the last triggered interval to the ref
             }
         }
 
@@ -102,7 +102,6 @@ function RunWorkout() {
                     <div className="text-center text-[20px]">
                         Rep {currentRep}/{reps} - Wave {currentWave}/{waves}
                     </div>
-                    {/* <div>{currentCountdown}</div> */}
                 </div>
                 <WorkoutDetails />
             </div>
