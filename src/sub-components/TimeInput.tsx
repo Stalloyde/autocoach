@@ -19,6 +19,7 @@ const TimeInput = ({ setRepInterval }: TimeInputPropsType) => {
         setDisplayInterval(formattedTime);
         setRepInterval(rawTime);
 
+        //on re-render, immediately set caret to the end of the input.. for mobile browser.
         requestAnimationFrame(() => {
             if (inputRef.current) {
                 const length = inputRef.current.value.length;
