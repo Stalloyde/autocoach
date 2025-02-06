@@ -31,13 +31,9 @@ function WorkoutConfig() {
 
     function handleStartWorkout(e: any) {
         e.preventDefault();
-        if (e.nativeEvent.submitter.name === 'start-workout')
-            token && currentUser
-                ? navigate(`/countdown/${currentUser.username}`)
-                : navigate('/countdown');
-
-        if (e.nativeEvent.submitter.name === 'add-to-favourites')
-            handleAddingToFavourites(e);
+        token && currentUser
+            ? navigate(`/countdown/${currentUser.username}`)
+            : navigate('/countdown');
     }
 
     useEffect(() => {
@@ -114,15 +110,13 @@ function WorkoutConfig() {
                             setCountdown(Number(e.currentTarget.value))
                         }
                     />
-                    <button
-                        name="start-workout"
-                        className="m-1 border border-slate-950 bg-green-700 p-2 text-white underline"
-                    >
+                    <button className="m-1 border border-slate-950 bg-green-700 p-2 text-white underline">
                         Start Workout{' '}
                     </button>
                     {token && (
                         <button
-                            name="add-to-favourites"
+                            type="button"
+                            onClick={handleAddingToFavourites}
                             className="m-1 border border-slate-950 bg-blue-900 p-2 text-white underline"
                         >
                             Add To Favourites{' '}
