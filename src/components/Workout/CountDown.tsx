@@ -47,7 +47,10 @@ function CountDown() {
                 <div className="text-center text-[40px]">
                     Workout starting in:
                 </div>
-                <div className="flex justify-center text-[150px]">
+                <div
+                    className="flex justify-center text-[150px]"
+                    data-testid="displayCountdown"
+                >
                     {countdown}
                 </div>
                 <WorkoutDetails />
