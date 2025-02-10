@@ -9,11 +9,6 @@ describe('SaveCancelButtons', () => {
     let providerProps = {};
 
     beforeEach(() => {
-        providerProps = {
-            setAddingToFavourites: mockSetAddingToFavourites,
-            handleOverWriteFavourites: mockHandleOverwriteFavourites,
-        };
-
         vi.clearAllMocks();
     });
 
