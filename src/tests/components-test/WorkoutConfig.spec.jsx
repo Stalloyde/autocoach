@@ -1,4 +1,4 @@
-import { screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import { customRender } from '../test.utils';
 import WorkoutConfig from '../../components/Workout/WorkoutConfig';
 import { describe } from 'vitest';
@@ -9,9 +9,10 @@ vi.mock('react-router', async () => {
     const actual = await vi.importActual('react-router');
     return {
         ...actual,
-        useNavigate: () => mockedUsedNavigate, // Return mocked function
+        useNavigate: () => mockedUsedNavigate,
     };
 });
+
 describe('workoutConfig', () => {
     const mockSetReps = vi.fn();
     const mockSetRepinterval = vi.fn();
